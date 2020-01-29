@@ -1,4 +1,3 @@
-import { FundsNewComponent } from './../../components/funds/funds-new/funds-new.component';
 import { FundsViewComponent } from './../../components/funds/funds-view/funds-view.component';
 import { FundsListComponent } from './../../components/funds/funds-list/funds-list.component';
 import { FundsEditComponent } from './../../components/funds/funds-edit/funds-edit.component';
@@ -8,7 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '', component: FundsListComponent, canActivate: [], children: [
-      { path: 'new', component: FundsNewComponent },
+      { path: 'new', component: FundsEditComponent },
       { path: ':id', component: FundsViewComponent, resolve: [] },
       { path: ':id/edit', component: FundsEditComponent, resolve: [] }
     ]
@@ -18,8 +17,7 @@ const routes: Routes = [
   declarations: [
     FundsEditComponent,
     FundsListComponent,
-    FundsViewComponent,
-    FundsNewComponent
+    FundsViewComponent
 
   ],
   imports: [RouterModule.forChild(routes)],
