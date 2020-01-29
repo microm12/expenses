@@ -1,3 +1,4 @@
+import { MaterialModule } from './../material.module';
 import { SuppliersViewComponent } from './../../components/suppliers/suppliers-view/suppliers-view.component';
 import { SuppliersListComponent } from './../../components/suppliers/suppliers-list/suppliers-list.component';
 import { SuppliersEditComponent } from './../../components/suppliers/suppliers-edit/suppliers-edit.component';
@@ -19,7 +20,9 @@ const routes: Routes = [
     SuppliersListComponent,
     SuppliersViewComponent
   ],
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    MaterialModule,
+    RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class SupplierRoutesModule {

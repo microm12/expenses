@@ -13,9 +13,6 @@ const array = [
 ];
 
 @NgModule({
-  declarations: [
-
-  ],
   imports: array,
   exports: array
 })

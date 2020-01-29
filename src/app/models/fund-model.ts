@@ -6,4 +6,14 @@ export class Fund {
   accNumber: string;
   accData?: string;
   startMoney?: number;
+
+  constructor(name, bank, iban, accNumber, startMoney, accData?) {
+    this.id = Math.floor(Math.random() * 10);
+    this.name = name;
+    this.bank = bank;
+    this.iban = iban;
+    this.accNumber = accNumber;
+    this.accData = (accData) ? accData : null;
+    this.startMoney = startMoney;
+  }
 }

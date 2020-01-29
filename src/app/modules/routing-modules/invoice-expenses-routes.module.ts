@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { InvoiceExpensesEditComponent } from 'src/app/components/invoice-expenses/invoice-expenses-edit/invoice-expenses-edit.component';
 import { InvoiceExpensesListComponent } from 'src/app/components/invoice-expenses/invoice-expenses-list/invoice-expenses-list.component';
 import { InvoiceExpensesViewComponent } from 'src/app/components/invoice-expenses/invoice-expenses-view/invoice-expenses-view.component';
+import { MaterialModule } from '../material.module';
 
 const routes: Routes = [
   {
@@ -19,7 +20,9 @@ const routes: Routes = [
     InvoiceExpensesListComponent,
     InvoiceExpensesViewComponent
   ],
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    MaterialModule,
+    RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class InvoiceExpensesRoutesModule {

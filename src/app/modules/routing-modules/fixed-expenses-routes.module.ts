@@ -3,6 +3,7 @@ import { FixedExpensesListComponent } from './../../components/fixed-expenses/fi
 import { FixedExpensesEditComponent } from './../../components/fixed-expenses/fixed-expenses-edit/fixed-expenses-edit.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { MaterialModule } from '../material.module';
 
 const routes: Routes = [
   {
@@ -19,7 +20,9 @@ const routes: Routes = [
     FixedExpensesListComponent,
     FixedExpensesViewComponent
   ],
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    MaterialModule,
+    RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class FixedExpensesRoutesModule {

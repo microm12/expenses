@@ -1,3 +1,56 @@
-<p>
-  client-list works!
-</p>
+<div class="header">
+  <h1>Πελάτες</h1>
+</div>
+
+<div class="btn">
+  <button mat-raised-button color="primary">Add Client</button>
+</div>
+
+<div class="center">
+  <mat-table
+    [dataSource]="dataset"
+    class="mat-elevation-z8"
+    style="width: 90%;"
+  >
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Όνομα</mat-header-cell>
+      <mat-cell *matCellDef="let element"
+        ><a routerLink="/edit">{{ element.name }}</a></mat-cell
+      >
+    </ng-container>
+
+    <!-- Account Email Column -->
+    <ng-container matColumnDef="accEmail">
+      <mat-header-cell *matHeaderCellDef
+        >Accounts Payable Email</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element">{{ element.accEmail }}</mat-cell>
+    </ng-container>
+
+    <!-- Edit Column -->
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+      <mat-cell *matCellDef
+        ><button mat-button color="primary">Edit</button></mat-cell
+      >
+    </ng-container>
+
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+      <mat-cell *matCellDef
+        ><button mat-button color="warn">Delete</button></mat-cell
+      >
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>

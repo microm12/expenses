@@ -3,6 +3,7 @@ import { InvoiceIncomesViewComponent } from './../../components/invoice-incomes/
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { InvoiceIncomesEditComponent } from 'src/app/components/invoice-incomes/invoice-incomes-edit/invoice-incomes-edit.component';
+import { MaterialModule } from '../material.module';
 
 const routes: Routes = [
   {
@@ -19,7 +20,9 @@ const routes: Routes = [
     InvoiceIncomesViewComponent,
     InvoiceIncomesListComponent
   ],
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    MaterialModule,
+    RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class InvoiceIncomesRoutesModule {

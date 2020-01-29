@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'expenses';
-  dataset = ["test", "test2", "test3", "test4"];
-  displayedColumns: string[] = ['name'];
 }

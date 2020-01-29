@@ -1,3 +1,4 @@
+import { MaterialModule } from './../material.module';
 import { ClientViewComponent } from './../../components/clients/client-view/client-view.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -19,7 +20,9 @@ const routes: Routes = [
     ClientViewComponent,
     ClientEditComponent
   ],
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    MaterialModule,
+    RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class ClientRoutesModule {
