@@ -1,0 +1,25 @@
+<mat-toolbar style="justify-content: space-between;" color="primary">
+  <div>
+    <a mat-button routerLink="/dashboard">Home</a>
+    <a mat-button routerLink="/funds">Funds</a>
+    <a mat-button routerLink="/clients">Clients</a>
+    <a mat-button routerLink="/suppliers">Suppliers</a>
+    <a mat-button [matMenuTriggerFor]="IncMenu">Incomes</a>
+    <mat-menu #IncMenu="matMenu">
+      <a mat-menu-item class="menu-item" routerLink="/invoice-incomes"
+        >Invoice</a
+      >
+      <a mat-menu-item class="menu-item" routerLink="/fixed-incomes">Fixed</a>
+    </mat-menu>
+    <a mat-button [matMenuTriggerFor]="ExpMenu">Expenses</a>
+    <mat-menu #ExpMenu="matMenu">
+      <a mat-menu-item class="menu-item" routerLink="/invoice-expenses"
+        >Invoice</a
+      >
+      <a mat-menu-item class="menu-item" routerLink="/fixed-expenses">Fixed</a>
+    </mat-menu>
+  </div>
+  <div>
+    <a mat-button routerLink="/login">Login</a>
+  </div>
+</mat-toolbar>

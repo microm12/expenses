@@ -1,13 +1,4 @@
-<mat-toolbar style="justify-content: space-between;" color="primary">
-  <div>
-    <span><a href="#">Home</a></span>
-  </div>
-  <div>
-    <span><a href="#">Clients</a></span>
-    <span>|</span>
-    <span><a href="#">Suppliers</a></span>
-  </div>
-</mat-toolbar>
+<app-navbar></app-navbar>
 <div class="center">
   <mat-table [dataSource]="dataset" class="mat-elevation-z8">
     <!--- Note that these columns can be defined in any order.
@@ -23,3 +14,4 @@
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
 </div>
+<router-outlet></router-outlet>
