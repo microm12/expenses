@@ -3,7 +3,13 @@
 </div>
 
 <div class="btn">
-  <button mat-raised-button color="primary">Add Supplier</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [routerLink]="['/suppliers', 'new']"
+  >
+    Add Supplier
+  </button>
 </div>
 
 <div class="center">
@@ -22,7 +28,9 @@
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef>Όνομα</mat-header-cell>
       <mat-cell *matCellDef="let element"
-        ><a routerLink="/edit">{{ element.name }}</a></mat-cell
+        ><a [routerLink]="['/suppliers', element.id]">{{
+          element.name
+        }}</a></mat-cell
       >
     </ng-container>
 
@@ -35,8 +43,14 @@
     <!-- Edit Column -->
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
-      <mat-cell *matCellDef
-        ><button mat-button color="primary">Edit</button></mat-cell
+      <mat-cell *matCellDef="let element"
+        ><button
+          mat-button
+          color="primary"
+          [routerLink]="['/suppliers', element.id, 'edit']"
+        >
+          Edit
+        </button></mat-cell
       >
     </ng-container>
 
@@ -51,4 +65,10 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
+</div>
+<div class="btn">
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>

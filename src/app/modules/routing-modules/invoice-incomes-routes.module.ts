@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { InvoiceIncomesEditComponent } from 'src/app/components/invoice-incomes/invoice-incomes-edit/invoice-incomes-edit.component';
 import { MaterialModule } from '../material.module';
+import { InvoiceIncomesComponent } from 'src/app/components/invoice-incomes/invoice-incomes.component';
 
 const routes: Routes = [
   {
-    path: '', component: InvoiceIncomesListComponent, canActivate: [], children: [
+    path: '', component: InvoiceIncomesComponent, canActivate: [], children: [
+      { path: '', component: InvoiceIncomesListComponent },
       { path: 'new', component: InvoiceIncomesEditComponent },
       { path: ':id', component: InvoiceIncomesViewComponent, resolve: [] },
       { path: ':id/edit', component: InvoiceIncomesEditComponent, resolve: [] }
@@ -18,7 +20,8 @@ const routes: Routes = [
   declarations: [
     InvoiceIncomesEditComponent,
     InvoiceIncomesViewComponent,
-    InvoiceIncomesListComponent
+    InvoiceIncomesListComponent,
+    InvoiceIncomesComponent
   ],
   imports: [
     MaterialModule,

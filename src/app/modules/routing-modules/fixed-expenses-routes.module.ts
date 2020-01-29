@@ -1,3 +1,4 @@
+import { FixedExpensesComponent } from './../../components/fixed-expenses/fixed-expenses.component';
 import { FixedExpensesViewComponent } from './../../components/fixed-expenses/fixed-expenses-view/fixed-expenses-view.component';
 import { FixedExpensesListComponent } from './../../components/fixed-expenses/fixed-expenses-list/fixed-expenses-list.component';
 import { FixedExpensesEditComponent } from './../../components/fixed-expenses/fixed-expenses-edit/fixed-expenses-edit.component';
@@ -7,7 +8,8 @@ import { MaterialModule } from '../material.module';
 
 const routes: Routes = [
   {
-    path: '', component: FixedExpensesListComponent, pathMatch: 'full', canActivate: [], children: [
+    path: '', component: FixedExpensesComponent, canActivate: [], children: [
+      { path: '', component: FixedExpensesListComponent },
       { path: 'new', component: FixedExpensesEditComponent },
       { path: ':id', component: FixedExpensesViewComponent, resolve: [] },
       { path: ':id/edit', component: FixedExpensesEditComponent, resolve: [] }
@@ -18,7 +20,8 @@ const routes: Routes = [
   declarations: [
     FixedExpensesEditComponent,
     FixedExpensesListComponent,
-    FixedExpensesViewComponent
+    FixedExpensesViewComponent,
+    FixedExpensesComponent
   ],
   imports: [
     MaterialModule,

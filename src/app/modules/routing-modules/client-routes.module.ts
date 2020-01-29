@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ClientListComponent } from 'src/app/components/clients/client-list/client-list.component';
 import { ClientEditComponent } from 'src/app/components/clients/client-edit/client-edit.component';
+import { ClientComponent } from 'src/app/components/clients/clients.component';
 
 const routes: Routes = [
   {
-    path: '', component: ClientListComponent, canActivate: [], children: [
+    path: '', component: ClientComponent, canActivate: [], children: [
+      { path: '', component: ClientListComponent },
       { path: 'new', component: ClientEditComponent },
       { path: ':id', component: ClientViewComponent, resolve: [] },
       { path: ':id/edit', component: ClientEditComponent, resolve: [] }
@@ -18,7 +20,8 @@ const routes: Routes = [
   declarations: [
     ClientListComponent,
     ClientViewComponent,
-    ClientEditComponent
+    ClientEditComponent,
+    ClientComponent
   ],
   imports: [
     MaterialModule,

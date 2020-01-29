@@ -4,10 +4,12 @@ import { SuppliersListComponent } from './../../components/suppliers/suppliers-l
 import { SuppliersEditComponent } from './../../components/suppliers/suppliers-edit/suppliers-edit.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { SuppliersComponent } from 'src/app/components/suppliers/suppliers.component';
 
 const routes: Routes = [
   {
-    path: '', component: SuppliersListComponent, canActivate: [], children: [
+    path: '', component: SuppliersComponent, canActivate: [], children: [
+      { path: '', component: SuppliersListComponent },
       { path: 'new', component: SuppliersEditComponent },
       { path: ':id', component: SuppliersViewComponent, resolve: [] },
       { path: ':id/edit', component: SuppliersEditComponent, resolve: [] }
@@ -18,7 +20,8 @@ const routes: Routes = [
   declarations: [
     SuppliersEditComponent,
     SuppliersListComponent,
-    SuppliersViewComponent
+    SuppliersViewComponent,
+    SuppliersComponent
   ],
   imports: [
     MaterialModule,

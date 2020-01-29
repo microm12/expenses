@@ -1,5 +1,7 @@
 import { Client } from './../../../models/client-model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-client-list',
@@ -7,17 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./client-list.component.scss']
 })
 export class ClientListComponent implements OnInit {
-
-  dataset: Client[] = [
+  displayedColumns: string[] = ['id', 'name', 'accEmail', 'edit', 'delete'];
+  dataset = new MatTableDataSource<Client>([
     new Client('Mark', 'mark@test.com', 'test'),
     new Client('John', 'john@test.com', 'test2', 'sample text'),
     new Client('Mary', 'mary@test.com', 'test3'),
     new Client('Jack', 'jack@test.com', 'test4', 'this is a test')
-  ];
-  displayedColumns: string[] = ['id', 'name', 'accEmail', 'edit', 'delete'];
-  constructor() { }
+  ]);
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  constructor() {
+  }
 
   ngOnInit() {
+    this.dataset.paginator = this.paginator;
   }
 
 }

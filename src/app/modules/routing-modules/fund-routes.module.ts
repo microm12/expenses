@@ -4,10 +4,12 @@ import { FundsEditComponent } from './../../components/funds/funds-edit/funds-ed
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MaterialModule } from '../material.module';
+import { FundsComponent } from 'src/app/components/funds/funds';
 
 const routes: Routes = [
   {
-    path: '', component: FundsListComponent, canActivate: [], children: [
+    path: '', component: FundsComponent, canActivate: [], children: [
+      { path: '', component: FundsListComponent },
       { path: 'new', component: FundsEditComponent },
       { path: ':id', component: FundsViewComponent, resolve: [] },
       { path: ':id/edit', component: FundsEditComponent, resolve: [] }
@@ -18,7 +20,8 @@ const routes: Routes = [
   declarations: [
     FundsEditComponent,
     FundsListComponent,
-    FundsViewComponent
+    FundsViewComponent,
+    FundsComponent
 
   ],
   imports: [
