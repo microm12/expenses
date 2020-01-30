@@ -1,3 +1,4 @@
+import { InvoiceExpensesService } from './../../../services/invoice-expenses.service';
 import { InvoiceExpense } from './../../../models/invoice-expense-model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,18 +11,15 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class InvoiceExpensesListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'supplierId', 'fundId', 'amount', 'payoutPeriod', 'edit', 'delete'];
-  dataset = new MatTableDataSource<InvoiceExpense>([
-    new InvoiceExpense('Supplier 1', 1, 5, 700, 30),
-    new InvoiceExpense('Supplier 2', 3, 7, 300, 25),
-    new InvoiceExpense('Supplier 3', 45, 23, 512.2, 25),
-    new InvoiceExpense('Supplier 4', 52, 14, 1200, 14)
-  ]);
+  dataset: MatTableDataSource<InvoiceExpense>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor() {
+  constructor(private invoiceExpensesService: InvoiceExpensesService) {
   }
 
   ngOnInit() {
+    const invoiceExpenses = this.invoiceExpensesService.getInvoiceExpenses();
+    this.dataset = new MatTableDataSource<InvoiceExpense>(invoiceExpenses);
     this.dataset.paginator = this.paginator;
   }
 }
