@@ -1,1 +1,128 @@
-<p>fixed-expenses-list works!</p>
+<div class="header">
+  <h1>Πάγια Έξοδα</h1>
+</div>
+
+<div class="btn">
+  <button
+    mat-raised-button
+    color="primary"
+    [routerLink]="['/fixed-expenses', 'new']"
+  >
+    Add Fixed Expense
+  </button>
+</div>
+
+<div class="center">
+  <mat-table
+    [dataSource]="dataset"
+    class="mat-elevation-z8"
+    style="width: 90%;"
+  >
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Όνομα</mat-header-cell>
+      <mat-cell *matCellDef="let element"
+        ><a [routerLink]="['/fixed-expenses', element.id]">{{
+          element.name
+        }}</a></mat-cell
+      >
+    </ng-container>
+
+    <!-- Account Supplier ID Column -->
+    <ng-container matColumnDef="supplierId">
+      <mat-header-cell *matHeaderCellDef>Προμηθευτής</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.supplierId }}</mat-cell>
+    </ng-container>
+
+    <!-- Account Fund ID Column -->
+    <ng-container matColumnDef="fundId">
+      <mat-header-cell *matHeaderCellDef>Ταμείο</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.fundId }}</mat-cell>
+    </ng-container>
+
+    <!-- Account Amount Column -->
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef>Ποσό</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.amount }}</mat-cell>
+    </ng-container>
+
+    <!-- Account Payout Period Column -->
+    <ng-container matColumnDef="payoutPeriod">
+      <mat-header-cell *matHeaderCellDef
+        >Διάστημα Πληρωμής (Ημέρες)</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element">{{ element.payoutPeriod }}</mat-cell>
+    </ng-container>
+
+    <!-- Account Day Column -->
+    <ng-container matColumnDef="day">
+      <mat-header-cell *matHeaderCellDef>Ημέρα</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.day }}</mat-cell>
+    </ng-container>
+
+    <!-- Account Frequency Column -->
+    <ng-container matColumnDef="frequency">
+      <mat-header-cell *matHeaderCellDef>Συχνότητα</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.frequency }}</mat-cell>
+    </ng-container>
+
+    <!-- Account Start Column -->
+    <ng-container matColumnDef="startDate">
+      <mat-header-cell *matHeaderCellDef>Έναρξη</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{
+        element.startDate.toLocaleDateString()
+      }}</mat-cell>
+    </ng-container>
+
+    <!-- Account End Column -->
+    <ng-container matColumnDef="endDate">
+      <mat-header-cell *matHeaderCellDef>Λήξη</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{
+        element.endDate.toLocaleDateString()
+      }}</mat-cell>
+    </ng-container>
+
+    <!-- Account PO Nuumber Column -->
+    <ng-container matColumnDef="poNumber">
+      <mat-header-cell *matHeaderCellDef>PO Number</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.poNumber }}</mat-cell>
+    </ng-container>
+
+    <!-- Edit Column -->
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+      <mat-cell *matCellDef="let element"
+        ><button
+          mat-button
+          color="primary"
+          [routerLink]="['/fixed-expenses', element.id, 'edit']"
+        >
+          Edit
+        </button></mat-cell
+      >
+    </ng-container>
+
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+      <mat-cell *matCellDef="let element"
+        ><button mat-button color="warn" onClick="">Delete</button></mat-cell
+      >
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+<div class="btn">
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

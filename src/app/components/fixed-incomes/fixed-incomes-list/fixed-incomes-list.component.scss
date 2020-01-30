@@ -1,0 +1,24 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.header {
+  font-family: "Roboto", sans-serif;
+  font-size: large;
+  display: flex;
+  justify-content: center;
+}
+
+.center {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.btn {
+  padding-top: 1rem;
+  width: 95%;
+  display: flex;
+  justify-content: flex-end;
+}
