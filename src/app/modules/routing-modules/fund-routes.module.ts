@@ -2,6 +2,7 @@ import { FundsViewComponent } from './../../components/funds/funds-view/funds-vi
 import { FundsListComponent } from './../../components/funds/funds-list/funds-list.component';
 import { FundsEditComponent } from './../../components/funds/funds-edit/funds-edit.component';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { MaterialModule } from '../material.module';
 import { FundsComponent } from 'src/app/components/funds/funds';
@@ -22,9 +23,9 @@ const routes: Routes = [
     FundsListComponent,
     FundsViewComponent,
     FundsComponent
-
   ],
   imports: [
+    CommonModule,
     MaterialModule,
     RouterModule.forChild(routes)],
   exports: [RouterModule]

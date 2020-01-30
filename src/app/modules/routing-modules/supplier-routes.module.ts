@@ -3,6 +3,7 @@ import { SuppliersViewComponent } from './../../components/suppliers/suppliers-v
 import { SuppliersListComponent } from './../../components/suppliers/suppliers-list/suppliers-list.component';
 import { SuppliersEditComponent } from './../../components/suppliers/suppliers-edit/suppliers-edit.component';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { SuppliersComponent } from 'src/app/components/suppliers/suppliers.component';
 
@@ -24,6 +25,7 @@ const routes: Routes = [
     SuppliersComponent
   ],
   imports: [
+    CommonModule,
     MaterialModule,
     RouterModule.forChild(routes)],
   exports: [RouterModule]

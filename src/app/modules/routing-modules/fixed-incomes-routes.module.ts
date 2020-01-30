@@ -1,5 +1,6 @@
 import { FixedIncomesViewComponent } from './../../components/fixed-incomes/fixed-incomes-view/fixed-incomes-view.component';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FixedIncomesEditComponent } from 'src/app/components/fixed-incomes/fixed-incomes-edit/fixed-incomes-edit.component';
 import { FixedIncomesListComponent } from 'src/app/components/fixed-incomes/fixed-incomes-list/fixed-incomes-list.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
     FixedIncomesComponent
   ],
   imports: [
+    CommonModule,
     MaterialModule,
     RouterModule.forChild(routes)],
   exports: [RouterModule]

@@ -1,1 +1,43 @@
-<p>invoice-incomes-view works!</p>
+<div class="header">
+  <h1>Τιμολόγιο Εσόδων</h1>
+</div>
+<div class="center">
+  <mat-card style="width: 90%;">
+    <mat-card-header>
+      <mat-card-title>{{ invoiceIncome.name }}</mat-card-title>
+      <mat-card-subtitle>Έσοδο</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <h3 mat-subheader>Πελάτης (ID)</h3>
+        <mat-list-item>
+          <h4 mat-line>{{ invoiceIncome.customerId }}</h4>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <h3 mat-subheader>Ταμείο (ID)</h3>
+        <mat-list-item>
+          <h4 mat-line>{{ invoiceIncome.fundId }}</h4>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <h3 mat-subheader>Amount</h3>
+        <mat-list-item>
+          <h4 mat-line>{{ invoiceIncome.amount }}</h4>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <h3 mat-subheader>Διάστημα Πληρωμής</h3>
+        <mat-list-item>
+          <h4 mat-line>{{ invoiceIncome.payoutPeriod }}</h4>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/invoice-incomes', invoiceIncome.id, 'edit']"
+      >
+        Edit
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

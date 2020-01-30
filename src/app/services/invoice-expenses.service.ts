@@ -6,10 +6,10 @@ import { Injectable } from '@angular/core';
 })
 export class InvoiceExpensesService {
   private invoiceExp: InvoiceExpense[] = [
-    new InvoiceExpense('Supplier 1', 1, 5, 700, 30),
-    new InvoiceExpense('Supplier 2', 3, 7, 300, 25),
-    new InvoiceExpense('Supplier 3', 45, 23, 512.2, 25),
-    new InvoiceExpense('Supplier 4', 52, 14, 1200, 14)
+    new InvoiceExpense('Supplier 1', 5, 700, 30, 1),
+    new InvoiceExpense('Supplier 2', 7, 300, 25, 3),
+    new InvoiceExpense('Supplier 3', 23, 512.2, 25, 45),
+    new InvoiceExpense('Supplier 4', 14, 1200, 14, 52)
   ];
 
   constructor() { }

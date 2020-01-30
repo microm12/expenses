@@ -1,1 +1,71 @@
-<p>fixed-incomes-view works!</p>
+<div class="header">
+  <h1>Πάγιο Έσοδο</h1>
+</div>
+<div class="center">
+  <mat-card style="width: 90%;">
+    <mat-card-header>
+      <mat-card-title>{{ fixedIncome.name }}</mat-card-title>
+      <mat-card-subtitle>Έσοδο</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <h3 mat-subheader>Πελάτης (ID)</h3>
+        <mat-list-item>
+          <h4 mat-line>{{ fixedIncome.customerId }}</h4>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <h3 mat-subheader>Ταμείο (ID)</h3>
+        <mat-list-item>
+          <h4 mat-line>{{ fixedIncome.fundId }}</h4>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <h3 mat-subheader>Amount</h3>
+        <mat-list-item>
+          <h4 mat-line>{{ fixedIncome.amount }}</h4>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <h3 mat-subheader>Διάστημα Πληρωμής</h3>
+        <mat-list-item>
+          <h4 mat-line>{{ fixedIncome.payoutPeriod }}</h4>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <h3 mat-subheader>Ημέρα</h3>
+        <mat-list-item>
+          <h4 mat-line>{{ fixedIncome.day }}</h4>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <h3 mat-subheader>Συχνότητα</h3>
+        <mat-list-item>
+          <h4 mat-line>{{ fixedIncome.frequency }}</h4>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <h3 mat-subheader>Έναρξη</h3>
+        <mat-list-item>
+          <h4 mat-line>{{ fixedIncome.startDate | date }}</h4>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <h3 mat-subheader>Λήξη</h3>
+        <mat-list-item>
+          <h4 mat-line>{{ fixedIncome.endDate | date }}</h4>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <div *ngIf="fixedIncome.poNumber">
+          <mat-divider></mat-divider>
+          <h3 mat-subheader>PO Number</h3>
+          <mat-list-item>
+            <h4 mat-line>{{ fixedIncome.poNumber }}</h4>
+          </mat-list-item>
+        </div>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/fixed-incomes', fixedIncome.id, 'edit']"
+      >
+        Edit
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

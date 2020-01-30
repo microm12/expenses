@@ -11,10 +11,10 @@ export class FixedExpense {
   endDate: Date;
   poNumber?: string;
 
-  constructor(name, supplierId, fundId, amount, payoutPeriod, day, frequency, startDate, endDate, poNumber?) {
+  constructor(name, fundId, amount, payoutPeriod, day, frequency, startDate, endDate, supplierId?, poNumber?) {
     this.id = Math.ceil(Math.random() * 10);
     this.name = name;
-    this.supplierId = supplierId;
+    this.supplierId = (supplierId) ? supplierId : null;
     this.fundId = fundId;
     this.amount = amount;
     this.payoutPeriod = payoutPeriod;

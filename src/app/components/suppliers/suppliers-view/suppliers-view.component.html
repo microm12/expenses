@@ -1,3 +1,35 @@
-<p>
-  suppliers-view works!
-</p>
+<div class="header">
+  <h1>Προμηθευτής</h1>
+</div>
+<div class="center">
+  <mat-card style="width: 90%;">
+    <mat-card-header>
+      <mat-card-title>{{ supplier.name }}</mat-card-title>
+      <mat-card-subtitle>Προμηθευτής</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <h3 mat-subheader>Contact Email</h3>
+        <mat-list-item>
+          <h4 mat-line>{{ supplier.contactEmail }}</h4>
+        </mat-list-item>
+        <div *ngIf="supplier.contacts">
+          <mat-divider></mat-divider>
+          <h3 mat-subheader>Contacts</h3>
+          <mat-list-item>
+            <h4 mat-line>{{ supplier.contacts }}</h4>
+          </mat-list-item>
+        </div>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/suppliers', supplier.id, 'edit']"
+      >
+        Edit
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

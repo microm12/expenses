@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { InvoiceExpensesEditComponent } from 'src/app/components/invoice-expenses/invoice-expenses-edit/invoice-expenses-edit.component';
 import { InvoiceExpensesListComponent } from 'src/app/components/invoice-expenses/invoice-expenses-list/invoice-expenses-list.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
     InvoiceExpensesComponent
   ],
   imports: [
+    CommonModule,
     MaterialModule,
     RouterModule.forChild(routes)],
   exports: [RouterModule]
