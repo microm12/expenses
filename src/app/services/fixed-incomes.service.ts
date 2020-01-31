@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { FixedIncome } from '../models/fixed-income-model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FixedIncomesService {
+  fixedIncomesChanged = new Subject<FixedIncome[]>();
   private fixedIn: FixedIncome[] = [
     new FixedIncome('Company 1', 1, 5, 700, 30, '1st day of the month', 1, new Date('01-20-2020'), new Date('05-23-2020'), 'Not my BDay'),
     new FixedIncome('Company 2', 3, 7, 300, 25, 'Last day of the month ', 2, new Date('02-09-2020'), new Date('07-30-2021')),
@@ -15,7 +17,7 @@ export class FixedIncomesService {
   constructor() { }
 
   getFixedIncomes() {
-    return this.fixedIn;
+    this.fixedIncomesChanged.next(this.fixedIn);
   }
 
   getFixedIncomesById(id: number): FixedIncome {
@@ -26,4 +28,28 @@ export class FixedIncomesService {
     }
   }
 
+  addFixedIncome(newFixedIncome: FixedIncome) {
+    this.fixedIn.push(newFixedIncome);
+    this.fixedIncomesChanged.next(this.fixedIn);
+  }
+
+  updateFixedIncome(id: number, newFixedIncome: FixedIncome) {
+    for (let fixedIncome of this.fixedIn) {
+      if (fixedIncome.id === id) {
+        let index = this.fixedIn.indexOf(fixedIncome);
+        this.fixedIn.splice(index, 1, newFixedIncome);
+        this.fixedIncomesChanged.next(this.fixedIn);
+      }
+    }
+  }
+
+  deleteFixedIncome(id: number) {
+    for (let fixedIncome of this.fixedIn) {
+      if (fixedIncome.id === id) {
+        let index = this.fixedIn.indexOf(fixedIncome);
+        this.fixedIn.splice(index, 1);
+        this.fixedIncomesChanged.next(this.fixedIn);
+      }
+    }
+  }
 }

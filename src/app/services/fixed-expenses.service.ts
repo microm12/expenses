@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { FixedExpense } from '../models/fixed-expense-model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FixedExpensesService {
+  fixedExpensesChanged = new Subject<FixedExpense[]>();
   private fixedExpenses: FixedExpense[] = [
     new FixedExpense('Supplier A', 5, 700, 30, '1st day of the month', 1, new Date('01-20-2020'), new Date('05-23-2020'), 1, 'Not my BDay'),
     new FixedExpense('Supplier B', 7, 300, 25, 'Last day of the month ', 2, new Date('02-09-2020'), new Date('07-30-2021'), 3),
@@ -15,13 +17,38 @@ export class FixedExpensesService {
   constructor() { }
 
   getFixedExpenses() {
-    return this.fixedExpenses;
+    this.fixedExpensesChanged.next(this.fixedExpenses);
   }
 
   getFixedExpensesById(id: number): FixedExpense {
     for (const foundFixedExpenses of this.fixedExpenses) {
       if (foundFixedExpenses.id === id) {
         return foundFixedExpenses;
+      }
+    }
+  }
+
+  addFixedExpense(newFixedExpense: FixedExpense) {
+    this.fixedExpenses.push(newFixedExpense);
+    this.fixedExpensesChanged.next(this.fixedExpenses);
+  }
+
+  updateFixedExpense(id: number, newFixedExpense: FixedExpense) {
+    for (let fixedExpense of this.fixedExpenses) {
+      if (fixedExpense.id === id) {
+        let index = this.fixedExpenses.indexOf(fixedExpense);
+        this.fixedExpenses.splice(index, 1, newFixedExpense);
+        this.fixedExpensesChanged.next(this.fixedExpenses);
+      }
+    }
+  }
+
+  deleteFixedExpense(id: number) {
+    for (let fixedExpense of this.fixedExpenses) {
+      if (fixedExpense.id === id) {
+        let index = this.fixedExpenses.indexOf(fixedExpense);
+        this.fixedExpenses.splice(index, 1);
+        this.fixedExpensesChanged.next(this.fixedExpenses);
       }
     }
   }

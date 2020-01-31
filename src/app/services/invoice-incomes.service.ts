@@ -1,10 +1,12 @@
 import { InvoiceIncome } from './../models/invoice-income-model';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvoiceIncomesService {
+  invoiceIncomesChanged = new Subject<InvoiceIncome[]>();
   private invoiceIn: InvoiceIncome[] = [
     new InvoiceIncome('Client 1', 1, 5, 700, 30),
     new InvoiceIncome('Client 2', 3, 7, 300, 25),
@@ -15,7 +17,7 @@ export class InvoiceIncomesService {
   constructor() { }
 
   getInvoiceIncomes() {
-    return this.invoiceIn;
+    this.invoiceIncomesChanged.next(this.invoiceIn);
   }
 
   getInvoiceIncomesById(id: number): InvoiceIncome {
@@ -26,4 +28,28 @@ export class InvoiceIncomesService {
     }
   }
 
+  addInvoiceIncome(newInvoiceIncome: InvoiceIncome) {
+    this.invoiceIn.push(newInvoiceIncome);
+    this.invoiceIncomesChanged.next(this.invoiceIn);
+  }
+
+  updateInvoiceIncome(id: number, newInvoiceIncome: InvoiceIncome) {
+    for (let invoiceIncome of this.invoiceIn) {
+      if (invoiceIncome.id === id) {
+        let index = this.invoiceIn.indexOf(invoiceIncome);
+        this.invoiceIn.splice(index, 1, newInvoiceIncome);
+        this.invoiceIncomesChanged.next(this.invoiceIn);
+      }
+    }
+  }
+
+  deleteInvoiceIncome(id: number) {
+    for (let invoiceIncome of this.invoiceIn) {
+      if (invoiceIncome.id === id) {
+        let index = this.invoiceIn.indexOf(invoiceIncome);
+        this.invoiceIn.splice(index, 1);
+        this.invoiceIncomesChanged.next(this.invoiceIn);
+      }
+    }
+  }
 }

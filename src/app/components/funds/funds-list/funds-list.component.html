@@ -65,8 +65,10 @@
     <!-- Delete Column -->
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
-      <mat-cell *matCellDef
-        ><button mat-button color="warn">Delete</button></mat-cell
+      <mat-cell *matCellDef="let element"
+        ><button mat-button color="warn" (click)="onDelete(element.id)">
+          Delete
+        </button></mat-cell
       >
     </ng-container>
 

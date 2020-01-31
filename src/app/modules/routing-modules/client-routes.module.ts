@@ -2,6 +2,7 @@ import { MaterialModule } from './../material.module';
 import { ClientViewComponent } from './../../components/clients/client-view/client-view.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { ClientListComponent } from 'src/app/components/clients/client-list/client-list.component';
 import { ClientEditComponent } from 'src/app/components/clients/client-edit/client-edit.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
     ClientComponent
   ],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     MaterialModule,
     RouterModule.forChild(routes)],

@@ -16,7 +16,7 @@ export class FundsViewComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.fundId = +params.id;
-      this.fund = this.fundsService.getClientById(this.fundId);
+      this.fund = this.fundsService.getFundById(this.fundId);
     });
   }
 
