@@ -26,6 +26,14 @@ export class FundsService {
     }
   }
 
+  getFundIds() {
+    const ids = [];
+    for (const fund of this.funds) {
+      ids.push(fund.id);
+    }
+    return ids;
+  }
+
   addFund(newFund: Fund) {
     this.funds.push(newFund);
     this.fundsChanged.next(this.funds);
