@@ -4,6 +4,7 @@ import { SuppliersListComponent } from './../../components/suppliers/suppliers-l
 import { SuppliersEditComponent } from './../../components/suppliers/suppliers-edit/suppliers-edit.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { SuppliersComponent } from 'src/app/components/suppliers/suppliers.component';
 
@@ -25,6 +26,7 @@ const routes: Routes = [
     SuppliersComponent
   ],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     MaterialModule,
     RouterModule.forChild(routes)],
