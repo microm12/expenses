@@ -27,6 +27,14 @@ export class SuppliersService {
     }
   }
 
+  getSupplierIds() {
+    const ids = [];
+    for (const supplier of this.suppliers) {
+      ids.push(supplier.id);
+    }
+    return ids;
+  }
+
   addSupplier(newSupplier: Supplier) {
     this.suppliers.push(newSupplier);
     this.suppliersChanged.next(this.suppliers);

@@ -28,6 +28,14 @@ export class ClientsService {
     }
   }
 
+  getClientIds() {
+    const ids = [];
+    for (const client of this.clients) {
+      ids.push(client.id);
+    }
+    return ids;
+  }
+
   addClient(newClient: Client) {
     this.clients.push(newClient);
     this.clientsChanged.next(this.clients);

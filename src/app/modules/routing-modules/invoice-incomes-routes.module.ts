@@ -2,6 +2,7 @@ import { InvoiceIncomesListComponent } from './../../components/invoice-incomes/
 import { InvoiceIncomesViewComponent } from './../../components/invoice-incomes/invoice-incomes-view/invoice-incomes-view.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { InvoiceIncomesEditComponent } from 'src/app/components/invoice-incomes/invoice-incomes-edit/invoice-incomes-edit.component';
 import { MaterialModule } from '../material.module';
@@ -25,6 +26,7 @@ const routes: Routes = [
     InvoiceIncomesComponent
   ],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     MaterialModule,
     RouterModule.forChild(routes)],
