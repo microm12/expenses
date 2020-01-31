@@ -1,1 +1,69 @@
-<p>funds-edit works!</p>
+<div class="header">
+  <h1>Ταμείο</h1>
+</div>
+<div class="center">
+  <mat-card style="width: 90%;">
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h4>Όνομα</h4>
+      <mat-form-field color="primary">
+        <input matInput placeholder="Όνομα*" formControlName="name" />
+      </mat-form-field>
+      <h4>Bank</h4>
+      <mat-form-field color="primary">
+        <input matInput placeholder="Τράπεζα*" formControlName="bank" />
+      </mat-form-field>
+
+      <h4>IBAN</h4>
+      <mat-form-field>
+        <input matInput placeholder="IBAN*" formControlName="iban" />
+      </mat-form-field>
+
+      <h4>Account Number</h4>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Account Number*"
+          formControlName="accNumber"
+        />
+      </mat-form-field>
+      <div *ngIf="!editMode">
+        <h4>Αρχικό Ποσό</h4>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Ποσό*"
+            type="number"
+            formControlName="startMoney"
+          />
+        </mat-form-field>
+      </div>
+      <h4>Account Data</h4>
+      <mat-form-field>
+        <textarea
+          matInput
+          placeholder="Account Data"
+          formControlName="accData"
+        ></textarea>
+      </mat-form-field>
+
+      <mat-card-actions align="end">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!form.valid"
+          type="submit"
+        >
+          Save
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

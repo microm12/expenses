@@ -3,6 +3,7 @@ import { FundsListComponent } from './../../components/funds/funds-list/funds-li
 import { FundsEditComponent } from './../../components/funds/funds-edit/funds-edit.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { MaterialModule } from '../material.module';
 import { FundsComponent } from 'src/app/components/funds/funds';
@@ -25,6 +26,7 @@ const routes: Routes = [
     FundsComponent
   ],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     MaterialModule,
     RouterModule.forChild(routes)],
