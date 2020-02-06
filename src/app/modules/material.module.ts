@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const array = [
   MatTableModule,
@@ -25,7 +26,8 @@ const array = [
   MatInputModule,
   MatSelectModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatAutocompleteModule
 ];
 
 @NgModule({

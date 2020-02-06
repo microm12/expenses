@@ -50,7 +50,16 @@
           matInput
           placeholder="First/Last/X day of month*"
           formControlName="day"
+          [matAutocomplete]="auto"
         />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option value=" 1st day of the month">
+            1st day of the month
+          </mat-option>
+          <mat-option value="Last day of the month">
+            Last day of the month
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
       <h4>Συχνότητα</h4>
       <mat-form-field color="primary">

@@ -65,7 +65,7 @@ export class FixedExpensesEditComponent implements OnInit {
 
     this.form = new FormGroup({
       name: new FormControl(name, Validators.required),
-      supplierId: new FormControl(supplierId, Validators.required),
+      supplierId: new FormControl(supplierId),
       fundId: new FormControl(fundId, Validators.required),
       amount: new FormControl(amount, Validators.required),
       payoutPeriod: new FormControl(payoutPeriod, Validators.required),
