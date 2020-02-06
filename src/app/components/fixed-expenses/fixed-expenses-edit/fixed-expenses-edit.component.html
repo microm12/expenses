@@ -1,1 +1,124 @@
-<p>fixed-expenses-edit works!</p>
+<div class="header">
+  <h1>Πάγιο Έξοδο</h1>
+</div>
+<div class="center">
+  <mat-card style="width: 90%;">
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h4>Όνομα</h4>
+      <mat-form-field color="primary">
+        <input matInput placeholder="Όνομα*" formControlName="name" />
+      </mat-form-field>
+      <h4>Προμηθευτής</h4>
+      <mat-form-field>
+        <mat-label>ΙD Προμηθευτή</mat-label>
+        <mat-select formControlName="supplierId">
+          <mat-option
+            *ngFor="let supplierId of supplierIdList"
+            [value]="supplierId"
+          >
+            {{ supplierId }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <h4>Ταμείο</h4>
+      <mat-form-field>
+        <mat-label>ID Ταμείου</mat-label>
+        <mat-select formControlName="fundId">
+          <mat-option *ngFor="let fundId of fundIdList" [value]="fundId">
+            {{ fundId }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <h4>Ποσό</h4>
+      <mat-form-field color="primary">
+        <input
+          matInput
+          type="number"
+          placeholder="Ποσό*"
+          formControlName="amount"
+        />
+      </mat-form-field>
+      <h4>Διάστημα Πληρωμής</h4>
+      <mat-form-field color="primary">
+        <input
+          matInput
+          type="number"
+          placeholder="Ημέρες*"
+          formControlName="payoutPeriod"
+        />
+      </mat-form-field>
+      <h4>Ημέρα</h4>
+      <mat-form-field color="primary">
+        <input
+          matInput
+          placeholder="First/Last/X day of month*"
+          formControlName="day"
+        />
+      </mat-form-field>
+      <h4>Συχνότητα</h4>
+      <mat-form-field color="primary">
+        <mat-select formControlName="frequency">
+          <mat-option [value]="1">
+            Μηνιαία
+          </mat-option>
+          <mat-option [value]="2">
+            Διμηνιαία
+          </mat-option>
+          <mat-option [value]="3">
+            Τριμηνιαία
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <h4>Έναρξη</h4>
+      <mat-form-field color="primary">
+        <input
+          matInput
+          [matDatepicker]="pickerStart"
+          placeholder="Ημερομηνία Αρχής"
+          formControlName="startDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerStart"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerStart></mat-datepicker>
+      </mat-form-field>
+      <h4>Λήξη</h4>
+      <mat-form-field color="primary">
+        <input
+          matInput
+          [matDatepicker]="pickerEnd"
+          placeholder="Ημερομηνία Τέλους"
+          formControlName="endDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerEnd"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
+      </mat-form-field>
+      <h4>PO Number</h4>
+      <mat-form-field color="primary">
+        <input matInput placeholder="PO Number" formControlName="poNumber" />
+      </mat-form-field>
+      <mat-card-actions align="end">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!form.valid"
+          type="submit"
+        >
+          Save
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

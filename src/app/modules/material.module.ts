@@ -10,6 +10,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
 
 const array = [
   MatTableModule,
@@ -21,11 +23,14 @@ const array = [
   MatListModule,
   MatFormFieldModule,
   MatInputModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 ];
 
 @NgModule({
   imports: array,
+  //providers: [MatNativeDateModule],
   exports: array
 })
 export class MaterialModule { }
