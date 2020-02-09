@@ -39,7 +39,7 @@ export class ClientListComponent implements OnInit, OnDestroy {
 
   openDialog(id: number): void {
     const dialogRef = this.dialog.open(PopupComponent, {
-      width: '250px'
+      width: '30%'
     });
 
     dialogRef.afterClosed().subscribe(result => {
