@@ -4,6 +4,8 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { PopupComponent } from '../../shared/popup/popup.component';
 
 @Component({
   selector: 'app-invoice-expenses-list',
@@ -16,7 +18,7 @@ export class InvoiceExpensesListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor(private invoiceExpensesService: InvoiceExpensesService) {
+  constructor(private invoiceExpensesService: InvoiceExpensesService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -33,5 +35,17 @@ export class InvoiceExpensesListComponent implements OnInit, OnDestroy {
 
   onDelete(id: number) {
     this.invoiceExpensesService.deleteInvoiceExpense(id);
+  }
+
+  openDialog(id: number): void {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.onDelete(id);
+      }
+    });
   }
 }

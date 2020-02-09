@@ -1,3 +1,4 @@
+import { PopupComponent } from './components/shared/popup/popup.component';
 import { MaterialModule } from './modules/material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,8 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    PopupComponent
   ],
+  entryComponents: [PopupComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

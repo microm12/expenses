@@ -4,6 +4,8 @@ import { Supplier } from 'src/app/models/supplier-model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
+import { PopupComponent } from '../../shared/popup/popup.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-suppliers-list',
@@ -16,7 +18,7 @@ export class SuppliersListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private suppliersService: SuppliersService) { }
+  constructor(private suppliersService: SuppliersService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.subscription = this.suppliersService.suppliersChanged.subscribe(suppliers => {
@@ -34,4 +36,15 @@ export class SuppliersListComponent implements OnInit, OnDestroy {
     this.suppliersService.deleteSupplier(id);
   }
 
+  openDialog(id: number): void {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.onDelete(id);
+      }
+    });
+  }
 }

@@ -4,6 +4,8 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { PopupComponent } from '../../shared/popup/popup.component';
 
 @Component({
   selector: 'app-funds-list',
@@ -16,7 +18,7 @@ export class FundsListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private fundsService: FundsService) { }
+  constructor(private fundsService: FundsService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.subscription = this.fundsService.fundsChanged.subscribe(funds => {
@@ -32,6 +34,18 @@ export class FundsListComponent implements OnInit, OnDestroy {
 
   onDelete(id: number) {
     this.fundsService.deleteFund(id);
+  }
+
+  openDialog(id: number): void {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.onDelete(id);
+      }
+    });
   }
 
 }

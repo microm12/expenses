@@ -1,9 +1,11 @@
+import { PopupComponent } from './../../shared/popup/popup.component';
 import { Client } from './../../../models/client-model';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ClientsService } from 'src/app/services/clients.service';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-client-list',
@@ -16,7 +18,7 @@ export class ClientListComponent implements OnInit, OnDestroy {
   dataset: MatTableDataSource<Client>;
   subscription: Subscription;
 
-  constructor(private clientsService: ClientsService) {
+  constructor(private clientsService: ClientsService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -33,6 +35,18 @@ export class ClientListComponent implements OnInit, OnDestroy {
 
   onDelete(id: number) {
     this.clientsService.deleteClient(id);
+  }
+
+  openDialog(id: number): void {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.onDelete(id);
+      }
+    });
   }
 
 }

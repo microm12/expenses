@@ -4,6 +4,8 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { PopupComponent } from '../../shared/popup/popup.component';
 
 @Component({
   selector: 'app-fixed-incomes-list',
@@ -15,7 +17,7 @@ export class FixedIncomesListComponent implements OnInit, OnDestroy {
   dataset: MatTableDataSource<FixedIncome>;
   subscription: Subscription;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor(private fixedIncomesService: FixedIncomesService) {
+  constructor(private fixedIncomesService: FixedIncomesService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -32,5 +34,17 @@ export class FixedIncomesListComponent implements OnInit, OnDestroy {
 
   onDelete(id: number) {
     this.fixedIncomesService.deleteFixedIncome(id);
+  }
+
+  openDialog(id: number): void {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.onDelete(id);
+      }
+    });
   }
 }
