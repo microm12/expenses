@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { InvoiceExpense } from 'src/app/models/invoice-expense-model';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { SuppliersService } from 'src/app/services/suppliers.service';
 import { FundsService } from 'src/app/services/funds.service';
 import { InvoiceExpensesService } from 'src/app/services/invoice-expenses.service';
+import { Transaction, TransData } from 'src/app/models/transaction';
 
 @Component({
   selector: 'app-invoice-expenses-edit',
@@ -44,6 +45,8 @@ export class InvoiceExpensesEditComponent implements OnInit {
     let fundId: number;
     let amount: number;
     let payoutPeriod: number;
+    let transactions: Transaction[];
+    let moneySplit = new FormArray([]);
 
     if (this.editMode) {
       name = this.invoiceExpense.name;
@@ -51,6 +54,17 @@ export class InvoiceExpensesEditComponent implements OnInit {
       fundId = this.invoiceExpense.fundId;
       amount = this.invoiceExpense.amount;
       payoutPeriod = this.invoiceExpense.payoutPeriod;
+      transactions = this.invoiceExpense.transactions;
+      if (transactions) {
+        for (const transaction of transactions) {
+          for (const tameio of transaction.accountTransactions) {
+            moneySplit.push(new FormGroup({
+              tameioId: new FormControl(tameio.fundId, Validators.required),
+              tameioAmount: new FormControl(tameio.amount, Validators.required)
+            }));
+          }
+        }
+      }
     }
 
     this.form = new FormGroup({
@@ -59,16 +73,24 @@ export class InvoiceExpensesEditComponent implements OnInit {
       fundId: new FormControl(fundId, Validators.required),
       amount: new FormControl(amount, Validators.required),
       payoutPeriod: new FormControl(payoutPeriod, Validators.required),
+      moneySplit
     });
   }
 
   onSubmit() {
+    const transData = [];
+    for (let transaction in this.form.value['moneySplit']) {
+      transData.push(
+        new TransData(this.form.value['moneySplit'][transaction].tameioId, this.form.value['moneySplit'][transaction].tameioAmount)
+      );
+    }
     const newInvoiceExpense = new InvoiceExpense(
       this.form.value['name'],
       this.form.value['fundId'],
       this.form.value['amount'],
       this.form.value['payoutPeriod'],
-      this.form.value['supplierId']
+      this.form.value['supplierId'],
+      [new Transaction(transData)]
     );
     if (this.editMode) {
       this.invoiceExpensesService.updateInvoiceExpense(this.invoiceExpenseId, newInvoiceExpense);
@@ -80,5 +102,22 @@ export class InvoiceExpensesEditComponent implements OnInit {
 
   onCancel() {
     this.router.navigate(['/invoice-expenses']);
+  }
+
+  get controls() {
+    return (<FormArray>this.form.get('moneySplit')).controls;
+  }
+
+  onAddFund() {
+    (<FormArray>this.form.get('moneySplit')).push(
+      new FormGroup({
+        tameioId: new FormControl(null, Validators.required),
+        tameioAmount: new FormControl(null, Validators.required)
+      })
+    );
+  }
+
+  onDelFund(i: number) {
+    (<FormArray>this.form.get('moneySplit')).removeAt(i);
   }
 }

@@ -47,6 +47,60 @@
           formControlName="payoutPeriod"
         />
       </mat-form-field>
+      <h4>Κατανομή Ποσού</h4>
+      <div formArrayName="moneySplit">
+        <div
+          *ngFor="let tameioControl of controls; let i = index"
+          [formGroupName]="i"
+        >
+          <div class="fund-input">
+            <div class="fields">
+              <mat-form-field
+                color="primary"
+                style="width: 80%;margin-right: 2em;"
+              >
+                <mat-select formControlName="tameioId" placeholder="ID Ταμείου">
+                  <mat-option
+                    *ngFor="let fundId of fundIdList"
+                    [value]="fundId"
+                  >
+                    {{ fundId }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field
+                style="width: 80%; margin-right: 2em;"
+                color="primary"
+              >
+                <input
+                  matInput
+                  formControlName="tameioAmount"
+                  type="number"
+                  placeholder="Ποσό"
+                />
+              </mat-form-field>
+            </div>
+            <button
+              mat-raised-button
+              color="warn"
+              type="button"
+              (click)="onDelFund(i)"
+              style="height: 20%;"
+            >
+              Χ
+            </button>
+          </div>
+        </div>
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="onAddFund()"
+          style="margin-top: 1em;"
+        >
+          Add Fund
+        </button>
+      </div>
       <mat-card-actions align="end">
         <button
           mat-raised-button

@@ -16,3 +16,16 @@
   display: flex;
   justify-content: center;
 }
+
+.fund-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.fields {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
