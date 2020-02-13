@@ -4,3 +4,9 @@
   font-size: large;
   justify-content: center;
 }
+
+.center {
+  margin-top: -1em;
+  display: flex;
+  flex-direction: column;
+}

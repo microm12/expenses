@@ -2,6 +2,10 @@ import { DashboardComponent } from './../../components/dashboard/dashboard/dashb
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import * as PlotlyJS from 'plotly.js/dist/plotly.js';
+import { PlotlyModule } from 'angular-plotly.js';
+
+PlotlyModule.plotlyjs = PlotlyJS;
 
 const routes: Routes = [
   {
@@ -14,6 +18,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    PlotlyModule,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
