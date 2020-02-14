@@ -29,10 +29,9 @@ export class ClientsService {
   }
 
   getClientIds() {
-    const ids = [];
-    for (const client of this.clients) {
-      ids.push(client.id);
-    }
+    const ids = this.clients.map(client => {
+      return client.id;
+    });
     return ids;
   }
 
@@ -42,22 +41,20 @@ export class ClientsService {
   }
 
   updateClient(id: number, newClient: Client) {
-    for (let client of this.clients) {
+    this.clients.map((client, index) => {
       if (client.id === id) {
-        let index = this.clients.indexOf(client);
         this.clients.splice(index, 1, newClient);
         this.clientsChanged.next(this.clients);
       }
-    }
+    });
   }
 
   deleteClient(id: number) {
-    for (let client of this.clients) {
+    this.clients.map((client, index) => {
       if (client.id === id) {
-        let index = this.clients.indexOf(client);
         this.clients.splice(index, 1);
         this.clientsChanged.next(this.clients);
       }
-    }
+    });
   }
 }

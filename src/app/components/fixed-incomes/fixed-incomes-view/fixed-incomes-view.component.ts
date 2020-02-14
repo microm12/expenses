@@ -16,7 +16,7 @@ export class FixedIncomesViewComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.fixedIncomeId = +params.id;
-      this.fixedIncome = this.fixedIncomesService.getFixedIncomesById(this.fixedIncomeId);
+      this.fixedIncome = this.fixedIncomesService.getFixedIncomeById(this.fixedIncomeId);
     });
   }
 

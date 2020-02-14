@@ -30,7 +30,7 @@ export class FixedIncomesEditComponent implements OnInit {
       this.fixedIncomeId = +params.id;
       this.editMode = params.id != null;
       if (this.editMode) {
-        this.fixedIncome = this.fixedIncomesService.getFixedIncomesById(this.fixedIncomeId);
+        this.fixedIncome = this.fixedIncomesService.getFixedIncomeById(this.fixedIncomeId);
       }
       this.initForm();
     });

@@ -34,22 +34,20 @@ export class InvoiceIncomesService {
   }
 
   updateInvoiceIncome(id: number, newInvoiceIncome: InvoiceIncome) {
-    for (let invoiceIncome of this.invoiceIn) {
+    this.invoiceIn.map((invoiceIncome, index) => {
       if (invoiceIncome.id === id) {
-        let index = this.invoiceIn.indexOf(invoiceIncome);
         this.invoiceIn.splice(index, 1, newInvoiceIncome);
         this.invoiceIncomesChanged.next(this.invoiceIn);
       }
-    }
+    });
   }
 
   deleteInvoiceIncome(id: number) {
-    for (let invoiceIncome of this.invoiceIn) {
+    this.invoiceIn.map((invoiceIncome, index) => {
       if (invoiceIncome.id === id) {
-        let index = this.invoiceIn.indexOf(invoiceIncome);
         this.invoiceIn.splice(index, 1);
         this.invoiceIncomesChanged.next(this.invoiceIn);
       }
-    }
+    });
   }
 }

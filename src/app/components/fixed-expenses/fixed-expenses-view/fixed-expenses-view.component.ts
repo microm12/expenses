@@ -16,7 +16,7 @@ export class FixedExpensesViewComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.fixedExpenseId = +params.id;
-      this.fixedExpense = this.fixedExpensesService.getFixedExpensesById(this.fixedExpenseId);
+      this.fixedExpense = this.fixedExpensesService.getFixedExpenseById(this.fixedExpenseId);
     });
   }
 

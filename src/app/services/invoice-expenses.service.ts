@@ -34,22 +34,20 @@ export class InvoiceExpensesService {
   }
 
   updateInvoiceExpense(id: number, newInvoiceExpense: InvoiceExpense) {
-    for (let invoiceExpense of this.invoiceExp) {
+    this.invoiceExp.map((invoiceExpense, index) => {
       if (invoiceExpense.id === id) {
-        let index = this.invoiceExp.indexOf(invoiceExpense);
         this.invoiceExp.splice(index, 1, newInvoiceExpense);
         this.invoiceExpensesChanged.next(this.invoiceExp);
       }
-    }
+    });
   }
 
   deleteInvoiceExpense(id: number) {
-    for (let invoiceExpense of this.invoiceExp) {
+    this.invoiceExp.map((invoiceExpense, index) => {
       if (invoiceExpense.id === id) {
-        let index = this.invoiceExp.indexOf(invoiceExpense);
         this.invoiceExp.splice(index, 1);
         this.invoiceExpensesChanged.next(this.invoiceExp);
       }
-    }
+    });
   }
 }

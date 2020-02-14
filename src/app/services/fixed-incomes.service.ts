@@ -20,7 +20,7 @@ export class FixedIncomesService {
     this.fixedIncomesChanged.next(this.fixedIn);
   }
 
-  getFixedIncomesById(id: number): FixedIncome {
+  getFixedIncomeById(id: number): FixedIncome {
     for (const foundFixedIn of this.fixedIn) {
       if (foundFixedIn.id === id) {
         return foundFixedIn;
@@ -34,22 +34,20 @@ export class FixedIncomesService {
   }
 
   updateFixedIncome(id: number, newFixedIncome: FixedIncome) {
-    for (let fixedIncome of this.fixedIn) {
+    this.fixedIn.map((fixedIncome, index) => {
       if (fixedIncome.id === id) {
-        let index = this.fixedIn.indexOf(fixedIncome);
         this.fixedIn.splice(index, 1, newFixedIncome);
         this.fixedIncomesChanged.next(this.fixedIn);
       }
-    }
+    });
   }
 
   deleteFixedIncome(id: number) {
-    for (let fixedIncome of this.fixedIn) {
+    this.fixedIn.map((fixedIncome, index) => {
       if (fixedIncome.id === id) {
-        let index = this.fixedIn.indexOf(fixedIncome);
         this.fixedIn.splice(index, 1);
         this.fixedIncomesChanged.next(this.fixedIn);
       }
-    }
+    });
   }
 }

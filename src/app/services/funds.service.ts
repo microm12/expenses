@@ -29,10 +29,9 @@ export class FundsService {
   }
 
   getFundIds() {
-    const ids = [];
-    for (const fund of this.funds) {
-      ids.push(fund.id);
-    }
+    const ids = this.funds.map(fund => {
+      return fund.id;
+    });
     return ids;
   }
 
@@ -42,22 +41,20 @@ export class FundsService {
   }
 
   updateFund(id: number, newFund: Fund) {
-    for (let fund of this.funds) {
+    this.funds.map((fund, index) => {
       if (fund.id === id) {
-        let index = this.funds.indexOf(fund);
         this.funds.splice(index, 1, newFund);
         this.fundsChanged.next(this.funds);
       }
-    }
+    });
   }
 
   deleteFund(id: number) {
-    for (let fund of this.funds) {
+    this.funds.map((fund, index) => {
       if (fund.id === id) {
-        let index = this.funds.indexOf(fund);
         this.funds.splice(index, 1);
         this.fundsChanged.next(this.funds);
       }
-    }
+    });
   }
 }

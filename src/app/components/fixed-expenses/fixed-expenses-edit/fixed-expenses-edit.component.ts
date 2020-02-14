@@ -30,7 +30,7 @@ export class FixedExpensesEditComponent implements OnInit {
       this.fixedExpenseId = +params.id;
       this.editMode = params.id != null;
       if (this.editMode) {
-        this.fixedExpense = this.fixedExpensesService.getFixedExpensesById(this.fixedExpenseId);
+        this.fixedExpense = this.fixedExpensesService.getFixedExpenseById(this.fixedExpenseId);
       }
       this.initForm();
     });

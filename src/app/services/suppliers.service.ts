@@ -28,10 +28,9 @@ export class SuppliersService {
   }
 
   getSupplierIds() {
-    const ids = [];
-    for (const supplier of this.suppliers) {
-      ids.push(supplier.id);
-    }
+    const ids = this.suppliers.map(supplier => {
+      return supplier.id;
+    });
     return ids;
   }
 
@@ -41,22 +40,20 @@ export class SuppliersService {
   }
 
   updateSupplier(id: number, newSupplier: Supplier) {
-    for (let supplier of this.suppliers) {
+    this.suppliers.map((supplier, index) => {
       if (supplier.id === id) {
-        let index = this.suppliers.indexOf(supplier);
         this.suppliers.splice(index, 1, newSupplier);
         this.suppliersChanged.next(this.suppliers);
       }
-    }
+    });
   }
 
   deleteSupplier(id: number) {
-    for (let supplier of this.suppliers) {
+    this.suppliers.map((supplier, index) => {
       if (supplier.id === id) {
-        let index = this.suppliers.indexOf(supplier);
         this.suppliers.splice(index, 1);
         this.suppliersChanged.next(this.suppliers);
       }
-    }
+    });
   }
 }
