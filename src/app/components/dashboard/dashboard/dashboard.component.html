@@ -1,13 +1,12 @@
-<div class="header">
-  <h1>Dashboard</h1>
-</div>
-<div>
+<div class="sticky">
   <plotly-plot
     [data]="data1"
     [layout]="overviewLayout"
     [useResizeHandler]="true"
     [config]="{ displayModeBar: false }"
   ></plotly-plot>
+</div>
+<div style="padding-top: 10em;">
   <plotly-plot
     [data]="data2"
     [layout]="fundLayout"

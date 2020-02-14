@@ -9,7 +9,9 @@ export class FundsService {
   fundsChanged = new Subject<Fund[]>();
   private funds: Fund[] = [
     new Fund('Tameio 1', 'Peiraiws', 'IBB982371123', 'NO0978', 1900),
-    new Fund('Tameio 2', 'Ethniki', 'ETH982371123', 'NO0800', 1900, 'test')
+    new Fund('Tameio 2', 'Ethniki', 'ETH982371123', 'NO0800', 1900, 'test'),
+    new Fund('Tameio 3', 'Peiraiws', 'PEI982371123', 'NO0978', 4200),
+    new Fund('Tameio 4', 'Ethniki', 'KAR982371123', 'NO0800', 5231, 'test2')
   ];
 
   constructor() { }

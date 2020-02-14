@@ -1,12 +1,6 @@
-.header {
-  font-family: "Roboto", sans-serif;
-  display: flex;
-  font-size: large;
-  justify-content: center;
-}
-
-.center {
-  margin-top: -1em;
-  display: flex;
-  flex-direction: column;
+.sticky {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  padding-top: 4em;
 }
