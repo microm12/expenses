@@ -1,6 +1,7 @@
 import { InvoiceExpense } from './../models/invoice-expense-model';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Transaction } from '../models/transaction';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,10 @@ import { Subject } from 'rxjs';
 export class InvoiceExpensesService {
   invoiceExpensesChanged = new Subject<InvoiceExpense[]>();
   private invoiceExp: InvoiceExpense[] = [
-    new InvoiceExpense('Supplier 1', 5, 700, 30, 1),
-    new InvoiceExpense('Supplier 2', 7, 300, 25, 3),
-    new InvoiceExpense('Supplier 3', 23, 512.2, 25, 45),
-    new InvoiceExpense('Supplier 4', 14, 1200, 14, 52)
+    new InvoiceExpense('Supplier 1', 30, [new Transaction([{ fundId: 5, amount: 700 }])], 1),
+    new InvoiceExpense('Supplier 2', 25, [new Transaction([{ fundId: 7, amount: 300 }])], 3),
+    new InvoiceExpense('Supplier 3', 23, [new Transaction([{ fundId: 4, amount: 512.2 }])], 2),
+    new InvoiceExpense('Supplier 4', 14, [new Transaction([{ fundId: 2, amount: 1200 }])], 4)
   ];
 
   constructor() { }

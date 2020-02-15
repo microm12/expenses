@@ -42,8 +42,8 @@ export class InvoiceExpensesEditComponent implements OnInit {
   initForm() {
     let name = '';
     let supplierId: number;
-    let fundId: number;
-    let amount: number;
+    let fundId: number[];
+    let amount: number[];
     let payoutPeriod: number;
     let transactions: Transaction[];
     let moneySplit = new FormArray([]);
@@ -51,8 +51,8 @@ export class InvoiceExpensesEditComponent implements OnInit {
     if (this.editMode) {
       name = this.invoiceExpense.name;
       supplierId = this.invoiceExpense.supplierId;
-      fundId = this.invoiceExpense.fundId;
-      amount = this.invoiceExpense.amount;
+      // fundId = this.invoiceExpense.fundId;
+      // amount = this.invoiceExpense.amount;
       payoutPeriod = this.invoiceExpense.payoutPeriod;
       transactions = this.invoiceExpense.transactions;
       if (transactions) {
@@ -70,8 +70,8 @@ export class InvoiceExpensesEditComponent implements OnInit {
     this.form = new FormGroup({
       name: new FormControl(name, Validators.required),
       supplierId: new FormControl(supplierId),
-      fundId: new FormControl(fundId, Validators.required),
-      amount: new FormControl(amount, Validators.required),
+      // fundId: new FormControl(fundId, Validators.required),
+      // amount: new FormControl(amount, Validators.required),
       payoutPeriod: new FormControl(payoutPeriod, Validators.required),
       moneySplit
     });
@@ -86,11 +86,11 @@ export class InvoiceExpensesEditComponent implements OnInit {
     }
     const newInvoiceExpense = new InvoiceExpense(
       this.form.value['name'],
-      this.form.value['fundId'],
-      this.form.value['amount'],
+      // this.form.value['fundId'],
+      // this.form.value['amount'],
       this.form.value['payoutPeriod'],
+      [new Transaction(transData)],
       this.form.value['supplierId'],
-      [new Transaction(transData)]
     );
     if (this.editMode) {
       this.invoiceExpensesService.updateInvoiceExpense(this.invoiceExpenseId, newInvoiceExpense);

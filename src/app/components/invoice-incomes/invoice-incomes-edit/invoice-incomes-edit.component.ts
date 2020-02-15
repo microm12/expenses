@@ -42,8 +42,8 @@ export class InvoiceIncomesEditComponent implements OnInit {
   initForm() {
     let name = '';
     let clientId: number;
-    let fundId: number;
-    let amount: number;
+    let fundId: number[];
+    let amount: number[];
     let payoutPeriod: number;
     let transactions: Transaction[];
     let moneySplit = new FormArray([]);
@@ -51,8 +51,8 @@ export class InvoiceIncomesEditComponent implements OnInit {
     if (this.editMode) {
       name = this.invoiceIncome.name;
       clientId = this.invoiceIncome.customerId;
-      fundId = this.invoiceIncome.fundId;
-      amount = this.invoiceIncome.amount;
+      // fundId = this.invoiceIncome.fundId;
+      // amount = this.invoiceIncome.amount;
       payoutPeriod = this.invoiceIncome.payoutPeriod;
       transactions = this.invoiceIncome.transactions;
       if (transactions) {
@@ -70,8 +70,8 @@ export class InvoiceIncomesEditComponent implements OnInit {
     this.form = new FormGroup({
       name: new FormControl(name, Validators.required),
       clientId: new FormControl(clientId, Validators.required),
-      fundId: new FormControl(fundId, Validators.required),
-      amount: new FormControl(amount, Validators.required),
+      // fundId: new FormControl(fundId, Validators.required),
+      // amount: new FormControl(amount, Validators.required),
       payoutPeriod: new FormControl(payoutPeriod, Validators.required),
       moneySplit
     });
@@ -87,8 +87,8 @@ export class InvoiceIncomesEditComponent implements OnInit {
     const newInvoiceIncome = new InvoiceIncome(
       this.form.value['name'],
       this.form.value['clientId'],
-      this.form.value['fundId'],
-      this.form.value['amount'],
+      // this.form.value['fundId'],
+      // this.form.value['amount'],
       this.form.value['payoutPeriod'],
       [new Transaction(transData)]
     );

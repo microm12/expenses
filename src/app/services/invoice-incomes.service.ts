@@ -1,6 +1,7 @@
 import { InvoiceIncome } from './../models/invoice-income-model';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Transaction } from '../models/transaction';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,10 @@ import { Subject } from 'rxjs';
 export class InvoiceIncomesService {
   invoiceIncomesChanged = new Subject<InvoiceIncome[]>();
   private invoiceIn: InvoiceIncome[] = [
-    new InvoiceIncome('Client 1', 1, 5, 700, 30),
-    new InvoiceIncome('Client 2', 3, 7, 300, 25),
-    new InvoiceIncome('Client 3', 45, 23, 512.2, 25),
-    new InvoiceIncome('Client 4', 52, 14, 1200, 14)
+    new InvoiceIncome('Client 1', 1, 30, [new Transaction([{ fundId: 5, amount: 700 }])]),
+    new InvoiceIncome('Client 2', 3, 25, [new Transaction([{ fundId: 7, amount: 300 }])]),
+    new InvoiceIncome('Client 3', 45, 25, [new Transaction([{ fundId: 4, amount: 512.2 }])]),
+    new InvoiceIncome('Client 4', 52, 14, [new Transaction([{ fundId: 2, amount: 1200 }])])
   ];
 
   constructor() { }
