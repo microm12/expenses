@@ -56,14 +56,14 @@ export class InvoiceExpensesEditComponent implements OnInit {
       payoutPeriod = this.invoiceExpense.payoutPeriod;
       transactions = this.invoiceExpense.transactions;
       if (transactions) {
-        for (const transaction of transactions) {
-          for (const tameio of transaction.accountTransactions) {
+        transactions.map(transaction => {
+          transaction.accountTransactions.map(tameio => {
             moneySplit.push(new FormGroup({
               tameioId: new FormControl(tameio.fundId, Validators.required),
               tameioAmount: new FormControl(tameio.amount, Validators.required)
             }));
-          }
-        }
+          });
+        });
       }
     }
 
