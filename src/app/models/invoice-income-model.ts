@@ -3,7 +3,7 @@ export class InvoiceIncome {
   id?: number;
   name: string;
   customerId: number;
-  // fundId: number[];
+  fundIds;
   total: number = 0;
   payoutPeriod: number;
   transaction: Transaction;
@@ -16,8 +16,11 @@ export class InvoiceIncome {
     // this.amount = amount;
     this.payoutPeriod = payoutPeriod;
     this.transaction = transaction;
+    let ids = [];
     this.transaction.accountTransactions.map(data => {
       this.total += data.amount;
+      ids.push(data.fundId);
     });
+    this.fundIds = ids.toString();
   }
 }
