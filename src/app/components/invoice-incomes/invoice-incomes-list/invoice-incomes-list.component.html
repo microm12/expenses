@@ -3,21 +3,13 @@
 </div>
 
 <div class="btn">
-  <button
-    mat-raised-button
-    color="primary"
-    [routerLink]="['/invoice-incomes', 'new']"
-  >
+  <button mat-raised-button color="primary" [routerLink]="['/invoice-incomes', 'new']">
     Add Invoice Income
   </button>
 </div>
 
 <div class="center">
-  <mat-table
-    [dataSource]="dataset"
-    class="mat-elevation-z8"
-    style="width: 90%;"
-  >
+  <mat-table [dataSource]="dataset" class="mat-elevation-z8" style="width: 90%;">
     <!-- Id Column -->
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
@@ -27,11 +19,9 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef>Όνομα</mat-header-cell>
-      <mat-cell *matCellDef="let element"
-        ><a [routerLink]="['/invoice-incomes', element.id]">{{
+      <mat-cell *matCellDef="let element"><a [routerLink]="['/invoice-incomes', element.id]">{{
           element.name
-        }}</a></mat-cell
-      >
+        }}</a></mat-cell>
     </ng-container>
 
     <!-- Account Customer ID Column -->
@@ -49,39 +39,30 @@
     <!-- Account Amount Column -->
     <ng-container matColumnDef="amount">
       <mat-header-cell *matHeaderCellDef>Ποσό</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.amount }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{ element.total }}</mat-cell>
     </ng-container>
 
     <!-- Account Payout Period Column -->
     <ng-container matColumnDef="payoutPeriod">
-      <mat-header-cell *matHeaderCellDef
-        >Διάστημα Πληρωμής (Ημέρες)</mat-header-cell
-      >
+      <mat-header-cell *matHeaderCellDef>Διάστημα Πληρωμής (Ημέρες)</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ element.payoutPeriod }}</mat-cell>
     </ng-container>
 
     <!-- Edit Column -->
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
-      <mat-cell *matCellDef="let element"
-        ><button
-          mat-button
-          color="primary"
-          [routerLink]="['/invoice-incomes', element.id, 'edit']"
-        >
+      <mat-cell *matCellDef="let element"><button mat-button color="primary"
+          [routerLink]="['/invoice-incomes', element.id, 'edit']">
           Edit
-        </button></mat-cell
-      >
+        </button></mat-cell>
     </ng-container>
 
     <!-- Delete Column -->
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
-      <mat-cell *matCellDef="let element"
-        ><button mat-button color="warn" (click)="openDialog(element.id)">
+      <mat-cell *matCellDef="let element"><button mat-button color="warn" (click)="openDialog(element.id)">
           Delete
-        </button></mat-cell
-      >
+        </button></mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -89,8 +70,5 @@
   </mat-table>
 </div>
 <div class="btn">
-  <mat-paginator
-    [pageSizeOptions]="[5, 10, 20]"
-    showFirstLastButtons
-  ></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

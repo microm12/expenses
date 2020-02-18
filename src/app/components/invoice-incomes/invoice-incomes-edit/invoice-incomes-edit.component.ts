@@ -1,16 +1,16 @@
-import { InvoiceIncome } from './../../../models/invoice-income-model';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { ActivatedRoute, Router, Params } from '@angular/router';
-import { ClientsService } from 'src/app/services/clients.service';
-import { FundsService } from 'src/app/services/funds.service';
-import { InvoiceIncomesService } from 'src/app/services/invoice-incomes.service';
-import { Transaction, TransData } from 'src/app/models/transaction';
+import { InvoiceIncome } from "./../../../models/invoice-income-model";
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
+import { ActivatedRoute, Router, Params } from "@angular/router";
+import { ClientsService } from "src/app/services/clients.service";
+import { FundsService } from "src/app/services/funds.service";
+import { InvoiceIncomesService } from "src/app/services/invoice-incomes.service";
+import { Transaction, TransData } from "src/app/models/transaction";
 
 @Component({
-  selector: 'app-invoice-incomes-edit',
-  templateUrl: './invoice-incomes-edit.component.html',
-  styleUrls: ['./invoice-incomes-edit.component.scss']
+  selector: "app-invoice-incomes-edit",
+  templateUrl: "./invoice-incomes-edit.component.html",
+  styleUrls: ["./invoice-incomes-edit.component.scss"]
 })
 export class InvoiceIncomesEditComponent implements OnInit {
   form: FormGroup;
@@ -20,18 +20,22 @@ export class InvoiceIncomesEditComponent implements OnInit {
   fundIdList: number[];
   editMode: boolean;
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private clientsService: ClientsService,
     private fundsService: FundsService,
-    private invoiceIncomesService: InvoiceIncomesService) { }
+    private invoiceIncomesService: InvoiceIncomesService
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.invoiceIncomeId = +params.id;
       this.editMode = params.id != null;
       if (this.editMode) {
-        this.invoiceIncome = this.invoiceIncomesService.getInvoiceIncomesById(this.invoiceIncomeId);
+        this.invoiceIncome = this.invoiceIncomesService.getInvoiceIncomesById(
+          this.invoiceIncomeId
+        );
       }
       this.initForm();
     });
@@ -40,12 +44,12 @@ export class InvoiceIncomesEditComponent implements OnInit {
   }
 
   initForm() {
-    let name = '';
+    let name = "";
     let clientId: number;
     let fundId: number[];
     let amount: number[];
     let payoutPeriod: number;
-    let transactions: Transaction[];
+    let transaction: Transaction;
     let moneySplit = new FormArray([]);
 
     if (this.editMode) {
@@ -54,17 +58,15 @@ export class InvoiceIncomesEditComponent implements OnInit {
       // fundId = this.invoiceIncome.fundId;
       // amount = this.invoiceIncome.amount;
       payoutPeriod = this.invoiceIncome.payoutPeriod;
-      transactions = this.invoiceIncome.transactions;
-      if (transactions) {
-        transactions.map(transaction => {
-          transaction.accountTransactions.map(tameio => {
-            moneySplit.push(new FormGroup({
-              tameioId: new FormControl(tameio.fundId, Validators.required),
-              tameioAmount: new FormControl(tameio.amount, Validators.required)
-            }));
-          });
-        });
-      }
+      transaction = this.invoiceIncome.transaction;
+      transaction.accountTransactions.map(tameio => {
+        moneySplit.push(
+          new FormGroup({
+            tameioId: new FormControl(tameio.fundId, Validators.required),
+            tameioAmount: new FormControl(tameio.amount, Validators.required)
+          })
+        );
+      });
     }
 
     this.form = new FormGroup({
@@ -73,44 +75,58 @@ export class InvoiceIncomesEditComponent implements OnInit {
       // fundId: new FormControl(fundId, Validators.required),
       // amount: new FormControl(amount, Validators.required),
       payoutPeriod: new FormControl(payoutPeriod, Validators.required),
-      moneySplit
+      moneySplit:
+        moneySplit.length === 0
+          ? (moneySplit = new FormArray([
+              new FormGroup({
+                tameioId: new FormControl("", Validators.required),
+                tameioAmount: new FormControl(null, Validators.required)
+              })
+            ]))
+          : moneySplit
     });
   }
 
   onSubmit() {
     const transData = [];
-    for (let transaction in this.form.value['moneySplit']) {
+    for (let transaction in this.form.value["moneySplit"]) {
       transData.push(
-        new TransData(this.form.value['moneySplit'][transaction].tameioId, this.form.value['moneySplit'][transaction].tameioAmount)
+        new TransData(
+          this.form.value["moneySplit"][transaction].tameioId,
+          this.form.value["moneySplit"][transaction].tameioAmount
+        )
       );
     }
     const newInvoiceIncome = new InvoiceIncome(
-      this.form.value['name'],
-      this.form.value['clientId'],
+      this.form.value["name"],
+      this.form.value["clientId"],
       // this.form.value['fundId'],
       // this.form.value['amount'],
-      this.form.value['payoutPeriod'],
-      [new Transaction(transData)]
+      this.form.value["payoutPeriod"],
+      new Transaction(transData)
     );
 
     if (this.editMode) {
-      this.invoiceIncomesService.updateInvoiceIncome(this.invoiceIncomeId, newInvoiceIncome);
+      this.invoiceIncomesService.updateInvoiceIncome(
+        this.invoiceIncomeId,
+        newInvoiceIncome
+      );
     } else {
       this.invoiceIncomesService.addInvoiceIncome(newInvoiceIncome);
     }
-    this.router.navigate(['/invoice-incomes']);
+    this.router.navigate(["/invoice-incomes"]);
   }
 
   onCancel() {
-    this.router.navigate(['/invoice-incomes']);
+    this.router.navigate(["/invoice-incomes"]);
   }
 
   get controls() {
-    return (<FormArray>this.form.get('moneySplit')).controls;
+    return (<FormArray>this.form.get("moneySplit")).controls;
   }
 
   onAddFund() {
-    (<FormArray>this.form.get('moneySplit')).push(
+    (<FormArray>this.form.get("moneySplit")).push(
       new FormGroup({
         tameioId: new FormControl(null, Validators.required),
         tameioAmount: new FormControl(null, Validators.required)
@@ -119,6 +135,6 @@ export class InvoiceIncomesEditComponent implements OnInit {
   }
 
   onDelFund(i: number) {
-    (<FormArray>this.form.get('moneySplit')).removeAt(i);
+    (<FormArray>this.form.get("moneySplit")).removeAt(i);
   }
 }
