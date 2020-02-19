@@ -17,15 +17,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   tameio = {
-    x: [1, 2, 3, 4],
+    x: ["2015-05-18", "2015-06-25", "2015-07-31", "2015-08-01"],
     y: [16, 5, 11, -9],
     type: 'scatter',
   };
 
   exp = {
-    x: [1, 2, 3, 4],
+    x: ["2015-05-18", "2015-06-25", "2015-07-31", "2015-08-01"],
     y: [0, 0, 0, 0],
-    id: [1, 2, 3, 4],
     type: 'scatter',
     mode: 'markers',
     marker: {
@@ -35,9 +34,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   };
 
   inc = {
-    x: [1, 2, 3, 4],
+    x: ["2015-05-18", "2015-06-25", "2015-07-31", "2015-08-01"],
     y: [0, 0, 0, 0],
-    id: [1, 2, 3, 4],
     type: 'scatter',
     mode: 'markers',
     marker: {
@@ -53,18 +51,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
   overviewLayout = {
     showlegend: false,
     height: 120,
+    hovermode: 'closest',
     margin: {
       l: 20,
       r: 20,
       b: 0,
-      t: 25,
+      t: 55,
       pad: 4
     },
     xaxis: {
-      title: 'Date',
       autotick: false,
       side: 'top',
-      range: [0.5, 15],
+      range: ['2015-05-17', '2015-08-02'],
       fixedrange: true,
       zeroline: false
     },
@@ -73,9 +71,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       range: [-2, 1],
       fixedrange: true,
     },
-    yaxis2: { domain: [1, 10] },
-    yaxis3: { domain: [0, 1] },
-    yaxis4: { domain: [0.5, 1] }
   };
 
   fundLayout = {
@@ -85,23 +80,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
       l: 20,
       r: 20,
       b: 0,
-      t: 25,
+      t: 30,
       pad: 4
     },
     xaxis: {
       showticklabels: false,
       autotick: false,
       side: 'top',
-      range: [0.5, 15],
+      range: ['2015-05-17', '2015-08-02'],
       fixedrange: true,
-      dtick: 1,
     },
     yaxis: {
-      fixedrange: true
+      fixedrange: true,
     },
-    yaxis2: { domain: [1, 10] },
-    yaxis3: { domain: [0, 1] },
-    yaxis4: { domain: [0.5, 1] }
   };
 
   constructor(private fundsService: FundsService, public dialog: MatDialog) { }
