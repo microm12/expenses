@@ -2,6 +2,8 @@ import { FundsService } from 'src/app/services/funds.service';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Fund } from 'src/app/models/fund-model';
 import { Subscription } from 'rxjs';
+import { EditPopupComponent } from '../edit-popup/edit-popup.component';
+import { MatDialog } from '@angular/material/dialog';
 
 // declare let Plotly: any;
 
@@ -102,7 +104,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     yaxis4: { domain: [0.5, 1] }
   };
 
-  constructor(private fundsService: FundsService) { }
+  constructor(private fundsService: FundsService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.subscription = this.fundsService.fundsChanged.subscribe(funds => {
@@ -115,8 +117,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  onClick(e, fundId) {
-    console.log(e, fundId);
+  onClick(e) {
+    const dialogRef = this.dialog.open(EditPopupComponent, {
+      data: { date: e.points[0].x },
+      width: '95%'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+
+      }
+    });
   }
 
 

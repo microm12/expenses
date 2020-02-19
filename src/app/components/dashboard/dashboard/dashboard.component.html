@@ -3,6 +3,7 @@
     [data]="data1"
     [layout]="overviewLayout"
     [useResizeHandler]="true"
+    (plotly_click)="onClick($event)"
     [config]="{ displayModeBar: false }"
   ></plotly-plot>
 </div>
@@ -11,7 +12,6 @@
     [data]="data2"
     [layout]="fundLayout"
     [useResizeHandler]="true"
-    (plotly_click)="onClick($event, fund.id)"
     [config]="{ displayModeBar: false }"
     *ngFor="let fund of funds"
   ></plotly-plot>

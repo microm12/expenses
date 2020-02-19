@@ -7,14 +7,16 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EditPopupComponent } from './components/dashboard/edit-popup/edit-popup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    PopupComponent
+    PopupComponent,
+    EditPopupComponent
   ],
-  entryComponents: [PopupComponent],
+  entryComponents: [PopupComponent, EditPopupComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
