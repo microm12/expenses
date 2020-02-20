@@ -5,8 +5,6 @@ import { Subscription } from 'rxjs';
 import { EditPopupComponent } from '../edit-popup/edit-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 
-// declare let Plotly: any;
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
