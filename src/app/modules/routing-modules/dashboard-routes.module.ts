@@ -1,3 +1,5 @@
+import { MaterialModule } from './../material.module';
+import { EditPopupComponent } from './../../components/dashboard/edit-popup/edit-popup.component';
 import { DashboardComponent } from './../../components/dashboard/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -14,10 +16,13 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    EditPopupComponent
   ],
+  entryComponents: [EditPopupComponent],
   imports: [
     CommonModule,
+    MaterialModule,
     PlotlyModule,
     RouterModule.forChild(routes)
   ],

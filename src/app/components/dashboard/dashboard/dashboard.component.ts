@@ -17,13 +17,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   tameio = {
-    x: ["2015-05-18", "2015-06-25", "2015-07-31", "2015-08-01"],
+    x: ['2015-05-18', '2015-06-25', '2015-07-31', '2015-08-01'],
     y: [16, 5, 11, -9],
     type: 'scatter',
   };
 
   exp = {
-    x: ["2015-05-18", "2015-06-25", "2015-07-31", "2015-08-01"],
+    x: ['2015-05-18', '2015-06-25', '2015-07-31', '2015-08-01'],
     y: [0, 0, 0, 0],
     type: 'scatter',
     mode: 'markers',
@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   };
 
   inc = {
-    x: ["2015-05-18", "2015-06-25", "2015-07-31", "2015-08-01"],
+    x: ['2015-05-18', '2015-06-25', '2015-07-31', '2015-08-01'],
     y: [0, 0, 0, 0],
     type: 'scatter',
     mode: 'markers',

@@ -29,7 +29,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     CommonModule,
     MaterialModule,
-    RouterModule.forChild(routes)],
+    RouterModule.forChild(routes)
+  ],
   exports: [RouterModule]
 })
 export class FundRoutesModule {
