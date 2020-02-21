@@ -16,3 +16,9 @@
     *ngFor="let fund of funds"
   ></plotly-plot>
 </div>
+<div style="display: flex; justify-content: center;">
+  <div class="buttons">
+    <button mat-raised-button color="primary" (click)="updateGraph('prev')"> < </button>
+    <button mat-raised-button color="primary" (click)="updateGraph('next')"> > </button>
+  </div>
+</div>

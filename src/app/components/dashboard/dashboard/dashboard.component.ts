@@ -1,3 +1,4 @@
+import { DateRangeService } from './../../../services/misc/date-range.service';
 import { FundsService } from 'src/app/services/funds.service';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Fund } from 'src/app/models/fund-model';
@@ -12,16 +13,17 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   funds: Fund[];
+  range: string[] = this.dateRangeService.initRange();
   private subscription: Subscription;
 
   tameio = {
-    x: ['2015-05-18', '2015-06-25', '2015-07-31', '2015-08-01'],
+    x: ['2020-01-18', '2020-01-25', '2020-01-31', '2020-02-01'],
     y: [16, 5, 11, -9],
     type: 'scatter',
   };
 
   exp = {
-    x: ['2015-05-18', '2015-06-25', '2015-07-31', '2015-08-01'],
+    x: ['2020-01-18', '2020-01-25', '2020-01-31', '2020-02-01'],
     y: [0, 0, 0, 0],
     type: 'scatter',
     mode: 'markers',
@@ -32,7 +34,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   };
 
   inc = {
-    x: ['2015-05-18', '2015-06-25', '2015-07-31', '2015-08-01'],
+    x: ['2020-01-18', '2020-01-25', '2020-01-31', '2020-02-01'],
     y: [0, 0, 0, 0],
     type: 'scatter',
     mode: 'markers',
@@ -52,7 +54,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     hovermode: 'closest',
     margin: {
       l: 20,
-      r: 20,
+      r: 35,
       b: 0,
       t: 55,
       pad: 4
@@ -60,7 +62,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     xaxis: {
       autotick: false,
       side: 'top',
-      range: ['2015-05-17', '2015-08-02'],
+      range: this.range,
       fixedrange: true,
       zeroline: false
     },
@@ -76,7 +78,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     height: 250,
     margin: {
       l: 20,
-      r: 20,
+      r: 35,
       b: 0,
       t: 30,
       pad: 4
@@ -85,7 +87,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       showticklabels: false,
       autotick: false,
       side: 'top',
-      range: ['2015-05-17', '2015-08-02'],
+      range: this.range,
       fixedrange: true,
     },
     yaxis: {
@@ -93,7 +95,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     },
   };
 
-  constructor(private fundsService: FundsService, public dialog: MatDialog) { }
+  constructor(private fundsService: FundsService, public dialog: MatDialog, private dateRangeService: DateRangeService) { }
 
   ngOnInit(): void {
     this.subscription = this.fundsService.fundsChanged.subscribe(funds => {
@@ -119,6 +121,54 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
+    updateGraph(mode) {
+      this.range = this.dateRangeService.calcRange(this.range, mode);
+      this.overviewLayout = {
+        showlegend: false,
+        height: 120,
+        hovermode: 'closest',
+        margin: {
+          l: 20,
+          r: 35,
+          b: 0,
+          t: 55,
+          pad: 4
+        },
+        xaxis: {
+          autotick: false,
+          side: 'top',
+          range: this.range,
+          fixedrange: true,
+          zeroline: false
+        },
+        yaxis: {
+          showticklabels: false,
+          range: [-2, 1],
+          fixedrange: true,
+        },
+      };
 
-
+      this.fundLayout = {
+        showlegend: false,
+        height: 250,
+        margin: {
+          l: 20,
+          r: 35,
+          b: 0,
+          t: 30,
+          pad: 4
+        },
+        xaxis: {
+          showticklabels: false,
+          autotick: false,
+          side: 'top',
+          range: this.range,
+          fixedrange: true,
+        },
+        yaxis: {
+          fixedrange: true,
+        },
+      };
+    }
 }
+
