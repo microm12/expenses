@@ -53,11 +53,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     height: 120,
     hovermode: 'closest',
     margin: {
-      l: 20,
-      r: 35,
+      l: 30,
+      r: 20,
       b: 0,
       t: 55,
-      pad: 4
+      pad: 0
     },
     xaxis: {
       autotick: false,
@@ -77,11 +77,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     showlegend: false,
     height: 250,
     margin: {
-      l: 20,
-      r: 35,
+      l: 30,
+      r: 20,
       b: 0,
       t: 30,
-      pad: 4
+      pad: 0
     },
     xaxis: {
       showticklabels: false,
@@ -121,54 +121,54 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-    updateGraph(mode) {
-      this.range = this.dateRangeService.calcRange(this.range, mode);
-      this.overviewLayout = {
-        showlegend: false,
-        height: 120,
-        hovermode: 'closest',
-        margin: {
-          l: 20,
-          r: 35,
-          b: 0,
-          t: 55,
-          pad: 4
-        },
-        xaxis: {
-          autotick: false,
-          side: 'top',
-          range: this.range,
-          fixedrange: true,
-          zeroline: false
-        },
-        yaxis: {
-          showticklabels: false,
-          range: [-2, 1],
-          fixedrange: true,
-        },
-      };
+  updateGraph(mode) {
+    this.range = this.dateRangeService.calcRange(this.range, mode);
+    this.overviewLayout = {
+      showlegend: false,
+      height: 120,
+      hovermode: 'closest',
+      margin: {
+        l: 30,
+        r: 20,
+        b: 0,
+        t: 55,
+        pad: 4
+      },
+      xaxis: {
+        autotick: false,
+        side: 'top',
+        range: this.range,
+        fixedrange: true,
+        zeroline: false
+      },
+      yaxis: {
+        showticklabels: false,
+        range: [-2, 1],
+        fixedrange: true,
+      },
+    };
 
-      this.fundLayout = {
-        showlegend: false,
-        height: 250,
-        margin: {
-          l: 20,
-          r: 35,
-          b: 0,
-          t: 30,
-          pad: 4
-        },
-        xaxis: {
-          showticklabels: false,
-          autotick: false,
-          side: 'top',
-          range: this.range,
-          fixedrange: true,
-        },
-        yaxis: {
-          fixedrange: true,
-        },
-      };
-    }
+    this.fundLayout = {
+      showlegend: false,
+      height: 250,
+      margin: {
+        l: 30,
+        r: 20,
+        b: 0,
+        t: 30,
+        pad: 4
+      },
+      xaxis: {
+        showticklabels: false,
+        autotick: false,
+        side: 'top',
+        range: this.range,
+        fixedrange: true,
+      },
+      yaxis: {
+        fixedrange: true,
+      },
+    };
+  }
 }
 
