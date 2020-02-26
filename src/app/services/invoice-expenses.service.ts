@@ -12,7 +12,7 @@ export class InvoiceExpensesService {
     new InvoiceExpense(
       "Supplier 1",
       30,
-      new Transaction([{ fundId: 5, amount: 700 }], '2020-01-18'),
+      new Transaction([{ fundId: 5, amount: 700 }], '2020-01-20'),
       1
     ),
     new InvoiceExpense(

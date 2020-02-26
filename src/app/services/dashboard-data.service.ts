@@ -14,24 +14,37 @@ export class DashboardDataService {
 
   constructor(private invoiceIncomeService: InvoiceIncomesService, private invoiceExpensesService: InvoiceExpensesService) { }
 
-  getFundIcomes(date: string) {
+  getFundIcomes(date?: string, fundId?: number) {
     this.invoiceIncomeService.invoiceIncomesChanged.subscribe(incomes => {
       this.allIncomes = incomes.filter(income => {
-        return (income.transaction.date === date);
+        if (date) {
+          return (income.transaction.date === date);
+        } else if (fundId) {
+          return (income.transaction.accountTransactions.filter(trans => trans.fundId === fundId));
+        } else {
+          return income.transaction.date;
+        }
       });
     });
     this.invoiceIncomeService.getInvoiceIncomes();
     return this.allIncomes;
   }
 
-  getFundExpenses(date: string) {
+  getFundExpenses(date?: string, fundId?: number) {
     this.invoiceExpensesService.invoiceExpensesChanged.subscribe(epxenses => {
       this.allExpenses = epxenses.filter(expense => {
-        return (expense.transaction.date === date);
+        if (date) {
+          return (expense.transaction.date === date);
+        } else if (fundId) {
+          return (expense.transaction.accountTransactions.filter(trans => trans.fundId === fundId));
+        } else {
+          return expense.transaction.date;
+        }
       });
     });
     this.invoiceExpensesService.getInvoiceExpenses();
     return this.allExpenses;
   }
+
 
 }

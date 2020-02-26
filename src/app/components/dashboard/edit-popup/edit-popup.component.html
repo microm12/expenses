@@ -4,7 +4,19 @@
 <br />
 <div>
   <h4>Έσοδα</h4>
-</div>
-<div>
-  <h4>Έξοδα</h4>
+  <div *ngFor="let income of incomes">
+    <div *ngFor="let transaction of income.transaction.accountTransactions">
+      {{ income.transaction.date }}, {{ transaction.fundId }},
+      {{ transaction.amount }}
+    </div>
+  </div>
+  <div>
+    <h4>Έξοδα</h4>
+    <div *ngFor="let expense of expenses">
+      <div *ngFor="let transaction of expense.transaction.accountTransactions">
+        {{ expense.transaction.date }}, {{ transaction.fundId }},
+        {{ transaction.amount }}
+      </div>
+    </div>
+  </div>
 </div>

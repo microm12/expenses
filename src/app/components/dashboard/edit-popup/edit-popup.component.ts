@@ -22,7 +22,6 @@ export class EditPopupComponent implements OnInit {
   ngOnInit() {
     this.incomes = this.dashboardDataService.getFundIcomes(this.data.date);
     this.expenses = this.dashboardDataService.getFundExpenses(this.data.date);
-    console.log(this.incomes, this.expenses);
 
   }
 

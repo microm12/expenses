@@ -26,7 +26,7 @@ export class InvoiceExpensesEditComponent implements OnInit {
     private suppliersService: SuppliersService,
     private fundsService: FundsService,
     private invoiceExpensesService: InvoiceExpensesService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -78,11 +78,11 @@ export class InvoiceExpensesEditComponent implements OnInit {
       moneySplit:
         moneySplit.length === 0
           ? (moneySplit = new FormArray([
-              new FormGroup({
-                tameioId: new FormControl("", Validators.required),
-                tameioAmount: new FormControl(null, Validators.required)
-              })
-            ]))
+            new FormGroup({
+              tameioId: new FormControl("", Validators.required),
+              tameioAmount: new FormControl(null, Validators.required)
+            })
+          ]))
           : moneySplit
     });
   }
@@ -102,7 +102,7 @@ export class InvoiceExpensesEditComponent implements OnInit {
       // this.form.value['fundId'],
       // this.form.value['amount'],
       this.form.value["payoutPeriod"],
-      new Transaction(transData),
+      new Transaction(transData, (this.invoiceExpense.transaction.date) ? this.invoiceExpense.transaction.date : null),
       this.form.value["supplierId"]
     );
     if (this.editMode) {
