@@ -1,9 +1,10 @@
 export class Transaction {
   id?: number;
-  date?: Date;
+  date?: string;
   accountTransactions: TransData[];
 
-  constructor(accountTransactions: TransData[]) {
+  constructor(accountTransactions: TransData[], date?: string) {
+    this.date = date;
     this.accountTransactions = accountTransactions;
   }
 }

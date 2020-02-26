@@ -12,30 +12,30 @@ export class InvoiceExpensesService {
     new InvoiceExpense(
       "Supplier 1",
       30,
-      new Transaction([{ fundId: 5, amount: 700 }]),
+      new Transaction([{ fundId: 5, amount: 700 }], '2020-01-18'),
       1
     ),
     new InvoiceExpense(
       "Supplier 2",
       25,
-      new Transaction([{ fundId: 7, amount: 300 }]),
+      new Transaction([{ fundId: 7, amount: 300 }], '2020-01-25'),
       3
     ),
     new InvoiceExpense(
       "Supplier 3",
       23,
-      new Transaction([{ fundId: 4, amount: 512.2 }]),
+      new Transaction([{ fundId: 4, amount: 512.2 }], '2020-01-31'),
       2
     ),
     new InvoiceExpense(
       "Supplier 4",
       14,
-      new Transaction([{ fundId: 2, amount: 1200 }]),
+      new Transaction([{ fundId: 2, amount: 1200 }], '2020-02-01'),
       4
     )
   ];
 
-  constructor() {}
+  constructor() { }
 
   getInvoiceExpenses() {
     this.invoiceExpensesChanged.next(this.invoiceExp);
