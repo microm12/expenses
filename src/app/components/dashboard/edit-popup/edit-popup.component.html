@@ -3,20 +3,169 @@
 </div>
 <br />
 <div>
-  <h4>Έσοδα</h4>
-  <div *ngFor="let income of incomes">
-    <div *ngFor="let transaction of income.transaction.accountTransactions">
-      {{ income.transaction.date }}, {{ transaction.fundId }},
-      {{ transaction.amount }}
-    </div>
-  </div>
-  <div>
-    <h4>Έξοδα</h4>
-    <div *ngFor="let expense of expenses">
-      <div *ngFor="let transaction of expense.transaction.accountTransactions">
-        {{ expense.transaction.date }}, {{ transaction.fundId }},
-        {{ transaction.amount }}
+  <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <h4>Έσοδα</h4>
+      <div formArrayName="incomes">
+        <div
+          *ngFor="let incomeControl of incomeControls; let i = index"
+          [formGroupName]="i"
+        >
+          <mat-form-field>
+            <input
+              matInput
+              [matDatepicker]="incPicker"
+              placeholder="Ημερομηνία"
+              formControlName="incomeTransDate"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="incPicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #incPicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="number"
+              placeholder="Ποσό"
+              formControlName="incTotal"
+            />
+          </mat-form-field>
+          <div formArrayName="incomeSplit">
+            <div
+              *ngFor="let incomeControl of incomeSplitControls; let ii = index"
+              [formGroupName]="ii"
+            >
+              <mat-form-field>
+                <mat-select formControlName="tameioId" placeholder="ID Ταμείου">
+                  <mat-option
+                    *ngFor="let fundId of fundIdList"
+                    [value]="fundId"
+                  >
+                    {{ fundId }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  formControlName="tameioAmount"
+                  type="number"
+                  placeholder="Ποσό"
+                />
+              </mat-form-field>
+              <button
+                mat-raised-button
+                color="warn"
+                type="button"
+                (click)="onDelFund('incomeSplit', ii)"
+                [disabled]="ii < 1"
+                style="height: 20%;"
+              >
+                Χ
+              </button>
+            </div>
+            <button
+              mat-raised-button
+              color="primary"
+              type="button"
+              (click)="onAddFund('incomeSplit')"
+              style="margin-top: 1em;"
+            >
+              Add Fund
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+
+    <div>
+      <h4>Έξοδα</h4>
+      <div formArrayName="expenses">
+        <div
+          *ngFor="let expenseControl of expenseControls; let e = index"
+          [formGroupName]="e"
+        >
+          <mat-form-field>
+            <input
+              matInput
+              [matDatepicker]="expPicker"
+              placeholder="Ημερομηνία"
+              formControlName="expenseTransDate"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="expPicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #expPicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              type="number"
+              placeholder="Ποσό"
+              formControlName="expTotal"
+            />
+          </mat-form-field>
+          <div formArrayName="expenseSplit">
+            <div
+              *ngFor="let incomeControl of expenseSplitControls; let ee = index"
+              [formGroupName]="ee"
+            >
+              <mat-form-field>
+                <mat-select formControlName="tameioId" placeholder="ID Ταμείου">
+                  <mat-option
+                    *ngFor="let fundId of fundIdList"
+                    [value]="fundId"
+                  >
+                    {{ fundId }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  formControlName="tameioAmount"
+                  type="number"
+                  placeholder="Ποσό"
+                />
+              </mat-form-field>
+              <button
+                mat-raised-button
+                color="warn"
+                type="button"
+                (click)="onDelFund('expenseSplit', ee)"
+                [disabled]="ee < 1"
+                style="height: 20%;"
+              >
+                Χ
+              </button>
+            </div>
+            <button
+              mat-raised-button
+              color="primary"
+              type="button"
+              (click)="onAddFund('expenseSplit')"
+              style="margin-top: 1em;"
+            >
+              Add Fund
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-button (click)="onNoClick()">Cancel</button>
+      <button
+        mat-raised-button
+        mat-mat-dialog-close="yes"
+        color="primary"
+        [disabled]="!form.valid"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
 </div>

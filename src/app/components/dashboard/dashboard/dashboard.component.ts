@@ -74,7 +74,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     margin: {
       l: 30,
       r: 20,
-      b: 0,
+      b: 5,
       t: 30,
       pad: 0
     },
@@ -87,6 +87,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     },
     yaxis: {
       fixedrange: true,
+      autotick: true
     },
   };
 

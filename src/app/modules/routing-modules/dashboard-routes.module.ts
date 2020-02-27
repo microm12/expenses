@@ -3,6 +3,7 @@ import { EditPopupComponent } from './../../components/dashboard/edit-popup/edit
 import { DashboardComponent } from './../../components/dashboard/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import * as PlotlyJS from 'plotly.js/dist/plotly.js';
 import { PlotlyModule } from 'angular-plotly.js';
@@ -22,6 +23,7 @@ const routes: Routes = [
   entryComponents: [EditPopupComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     MaterialModule,
     PlotlyModule,
     RouterModule.forChild(routes)
