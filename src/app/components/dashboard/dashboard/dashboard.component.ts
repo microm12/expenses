@@ -179,10 +179,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       tameio.x = uniqueDates;
       tameio.y = uniqueAmounts;
 
-      console.log(tameio);
       tempData.push([tameio]);
     });
-    console.log(tempData);
     this.fundData = tempData;
   }
 

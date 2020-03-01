@@ -7,8 +7,8 @@ export class Fund {
   accData?: string;
   startMoney?: number;
 
-  constructor(name, bank, iban, accNumber, startMoney, accData?) {
-    this.id = Math.floor(Math.random() * 10);
+  constructor(name, bank, iban, accNumber, startMoney, accData?, id?: number) {
+    this.id = (id) ? id : Math.floor(Math.random() * 10);
     this.name = name;
     this.bank = bank;
     this.iban = iban;
