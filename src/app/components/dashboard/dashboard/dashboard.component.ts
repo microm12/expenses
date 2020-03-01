@@ -162,25 +162,38 @@ export class DashboardComponent implements OnInit, OnDestroy {
       };
 
       const transData = fundIncomeData.concat(fundExpenseData).sort((a, b) => a.date.localeCompare(b.date));
-      const filteredData = transData.filter(data => (data.amount[0] !== undefined));
+      const filteredData = transData.filter(data => data.amount.filter(transacData => transacData !== undefined));
       const dates = filteredData.map(data => data.date);
       const uniqueDates = dates.filter((item, pos) => dates.indexOf(item) === pos);
       const uniqueAmounts = [];
+      const unDates = [];
       uniqueDates.map(date => {
         let sum = 0;
+        let found = false;
         filteredData.map(data => {
-          if ((date === data.date) && data.amount[0]) {
-            sum += data.amount[0];
+          if ((date === data.date)) {
+            data.amount.map(innerData => {
+              if (innerData !== undefined) {
+                sum += innerData;
+                found = true;
+              }
+            });
           }
         });
-        uniqueAmounts.push(sum);
+        if (found) {
+          unDates.push(date);
+          uniqueAmounts.push(sum);
+        }
       });
 
-      tameio.x = uniqueDates;
+      tameio.x = unDates;
       tameio.y = uniqueAmounts;
 
       tempData.push([tameio]);
+      console.log(filteredData);
+
     });
+
     this.fundData = tempData;
   }
 
