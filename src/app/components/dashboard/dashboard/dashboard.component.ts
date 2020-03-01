@@ -162,13 +162,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
       };
 
       const transData = fundIncomeData.concat(fundExpenseData).sort((a, b) => a.date.localeCompare(b.date));
-      const dates = transData.map(data => data.date);
+      const filteredData = transData.filter(data => (data.amount[0] !== undefined));
+      const dates = filteredData.map(data => data.date);
       const uniqueDates = dates.filter((item, pos) => dates.indexOf(item) === pos);
       const uniqueAmounts = [];
       uniqueDates.map(date => {
         let sum = 0;
-        transData.map(data => {
-          if (date === data.date) {
+        filteredData.map(data => {
+          if ((date === data.date) && data.amount[0]) {
             sum += data.amount[0];
           }
         });
@@ -178,9 +179,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       tameio.x = uniqueDates;
       tameio.y = uniqueAmounts;
 
+      console.log(tameio);
       tempData.push([tameio]);
     });
-
+    console.log(tempData);
     this.fundData = tempData;
   }
 
