@@ -9,11 +9,11 @@
 </div>
 <div style="padding-top: 10em; width: 100%;">
   <plotly-plot
+    *ngFor="let fund of funds; let i = index"
     [data]="fundData[i]"
     [layout]="fundLayout"
     [useResizeHandler]="true"
     [config]="{ displayModeBar: false }"
-    *ngFor="let fund of funds; let i = index"
   ></plotly-plot>
 </div>
 <div style="display: flex; justify-content: center;">

@@ -13,25 +13,36 @@ export class InvoiceIncomesService {
       'Client 1',
       1,
       30,
-      new Transaction([{ fundId: 5, amount: 700 }], '2020-01-18')
+      new Transaction([{ fundId: 5, amount: 700 }], '2020-01-18'),
+      1
     ),
     new InvoiceIncome(
       'Client 2',
       3,
       25,
-      new Transaction([{ fundId: 7, amount: 300 }], '2020-01-25')
+      new Transaction([{ fundId: 7, amount: 300 }], '2020-01-25'),
+      2
     ),
     new InvoiceIncome(
       'Client 3',
       45,
       25,
-      new Transaction([{ fundId: 4, amount: 512.2 }], '2020-01-31')
+      new Transaction([{ fundId: 4, amount: 512.2 }], '2020-01-31'),
+      3
     ),
     new InvoiceIncome(
       'Client 4',
       52,
       14,
-      new Transaction([{ fundId: 2, amount: 1200 }], '2020-02-01')
+      new Transaction([{ fundId: 2, amount: 1200 }], '2020-02-01'),
+      4
+    ),
+    new InvoiceIncome(
+      'Client 5',
+      52,
+      14,
+      new Transaction([{ fundId: 2, amount: 1200 }], '2020-02-01'),
+      5
     )
   ];
 

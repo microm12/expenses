@@ -8,8 +8,8 @@ export class InvoiceExpense {
   payoutPeriod: number;
   transaction: Transaction;
 
-  constructor(name, payoutPeriod, transaction, supplierId?) {
-    this.id = Math.ceil(Math.random() * 10);
+  constructor(name, payoutPeriod, transaction, supplierId?, id?) {
+    this.id = (id) ? id : Math.ceil(Math.random() * 10);
     this.name = name;
     this.supplierId = supplierId ? supplierId : null;
     // this.fundId = fundId;

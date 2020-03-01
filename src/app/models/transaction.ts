@@ -3,9 +3,10 @@ export class Transaction {
   date?: string;
   accountTransactions: TransData[];
 
-  constructor(accountTransactions: TransData[], date?: string) {
+  constructor(accountTransactions: TransData[], date?: string, id?: number) {
     this.date = date;
     this.accountTransactions = accountTransactions;
+    this.id = id || null;
   }
 }
 

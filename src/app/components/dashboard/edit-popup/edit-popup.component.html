@@ -2,9 +2,9 @@
   <h2>Συναλλαγές στις {{ data.date }}</h2>
 </div>
 <br />
-<div>
+<mat-dialog-content style="height: 100%;">
   <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div>
+    <div *ngIf="incomes">
       <h4>Έσοδα</h4>
       <div formArrayName="incomes">
         <div
@@ -34,7 +34,10 @@
           </mat-form-field>
           <div formArrayName="incomeSplit">
             <div
-              *ngFor="let incomeControl of incomeSplitControls; let ii = index"
+              *ngFor="
+                let incomeControl of getIncomeSplitControls(i);
+                let ii = index
+              "
               [formGroupName]="ii"
             >
               <mat-form-field>
@@ -59,7 +62,7 @@
                 mat-raised-button
                 color="warn"
                 type="button"
-                (click)="onDelFund('incomeSplit', ii)"
+                (click)="onDelFund('incomeSplit', i, ii)"
                 [disabled]="ii < 1"
                 style="height: 20%;"
               >
@@ -70,7 +73,7 @@
               mat-raised-button
               color="primary"
               type="button"
-              (click)="onAddFund('incomeSplit')"
+              (click)="onAddFund('incomeSplit', i)"
               style="margin-top: 1em;"
             >
               Add Fund
@@ -80,7 +83,7 @@
       </div>
     </div>
 
-    <div>
+    <div *ngIf="expenses">
       <h4>Έξοδα</h4>
       <div formArrayName="expenses">
         <div
@@ -110,7 +113,10 @@
           </mat-form-field>
           <div formArrayName="expenseSplit">
             <div
-              *ngFor="let incomeControl of expenseSplitControls; let ee = index"
+              *ngFor="
+                let incomeControl of getExpenseSplitControls(e);
+                let ee = index
+              "
               [formGroupName]="ee"
             >
               <mat-form-field>
@@ -135,7 +141,7 @@
                 mat-raised-button
                 color="warn"
                 type="button"
-                (click)="onDelFund('expenseSplit', ee)"
+                (click)="onDelFund('expenseSplit', e, ee)"
                 [disabled]="ee < 1"
                 style="height: 20%;"
               >
@@ -146,7 +152,7 @@
               mat-raised-button
               color="primary"
               type="button"
-              (click)="onAddFund('expenseSplit')"
+              (click)="onAddFund('expenseSplit', e)"
               style="margin-top: 1em;"
             >
               Add Fund
@@ -155,17 +161,18 @@
         </div>
       </div>
     </div>
-    <div mat-dialog-actions align="end">
-      <button mat-button (click)="onNoClick()">Cancel</button>
-      <button
-        mat-raised-button
-        mat-mat-dialog-close="yes"
-        color="primary"
-        [disabled]="!form.valid"
-        type="submit"
-      >
-        Submit
-      </button>
-    </div>
   </form>
+</mat-dialog-content>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button
+    mat-raised-button
+    mat-mat-dialog-close="yes"
+    color="primary"
+    [disabled]="!form.valid"
+    type="submit"
+    (click)="onSubmit()"
+  >
+    Submit
+  </button>
 </div>

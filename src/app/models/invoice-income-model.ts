@@ -8,8 +8,8 @@ export class InvoiceIncome {
   payoutPeriod: number;
   transaction: Transaction;
 
-  constructor(name, customerId, payoutPeriod, transaction) {
-    this.id = Math.ceil(Math.random() * 10);
+  constructor(name, customerId, payoutPeriod, transaction, id?) {
+    this.id = (id) ? id : Math.ceil(Math.random() * 10);
     this.name = name;
     this.customerId = customerId;
     // this.fundId = fundId;

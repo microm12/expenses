@@ -1,7 +1,7 @@
+import { DateUtilities } from './../../../models/misc/dateUtilities';
 import { DashboardDataService } from './../../../services/dashboard-data.service';
-import { DateRangeService } from './../../../services/misc/date-range.service';
 import { FundsService } from 'src/app/services/funds.service';
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Fund } from 'src/app/models/fund-model';
 import { Subscription } from 'rxjs';
 import { EditPopupComponent } from '../edit-popup/edit-popup.component';
@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   funds: Fund[];
-  range: string[] = this.dateRangeService.initRange();
+  range: string[] = new DateUtilities().initRange();
   incomeDates: string[];
   expenseDates: string[];
   overviewData: Array<any>;
@@ -93,7 +93,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(private fundsService: FundsService,
     public dialog: MatDialog,
-    private dateRangeService: DateRangeService,
     private dashboardDataService: DashboardDataService) { }
 
   ngOnInit(): void {
@@ -111,7 +110,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   onClick(e) {
     const dialogRef = this.dialog.open(EditPopupComponent, {
       data: { date: e.points[0].x },
-      width: '95%'
+      width: '95%',
+      height: '90%'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -122,15 +122,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   populateData() {
-    const incomes = this.dashboardDataService.getFundIcomes();
+    const incomes = this.dashboardDataService.getFundIncomes();
     this.incomeDates = incomes.map(income => income.transaction.date);
     this.inc.x = this.incomeDates;
     const expenses = this.dashboardDataService.getFundExpenses();
     this.expenseDates = expenses.map(expense => expense.transaction.date);
     this.exp.x = this.expenseDates;
     this.overviewData = [this.exp, this.inc];
+    const tempData = [];
     this.funds.map(fund => {
-      const fundIncomes = this.dashboardDataService.getFundIcomes(null, fund.id);
+      const fundIncomes = this.dashboardDataService.getFundIncomes(null, fund.id);
       const fundExpenses = this.dashboardDataService.getFundExpenses(null, fund.id);
 
       const fundIncomeData = fundIncomes.map(income => {
@@ -157,7 +158,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       const tameio = {
         x: null,
         y: null,
-        type: 'line',
+        mode: 'lines+markers',
       };
 
       const transData = fundIncomeData.concat(fundExpenseData).sort((a, b) => a.date.localeCompare(b.date));
@@ -177,12 +178,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
       tameio.x = uniqueDates;
       tameio.y = uniqueAmounts;
 
-      this.fundData.push([tameio]);
+      tempData.push([tameio]);
     });
+
+    this.fundData = tempData;
   }
 
   updateGraph(mode) {
-    this.range = this.dateRangeService.calcRange(this.range, mode);
+    this.range = new DateUtilities().calcRange(this.range, mode);
     this.overviewLayout = {
       showlegend: false,
       height: 120,

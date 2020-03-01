@@ -14,7 +14,7 @@ export class DashboardDataService {
 
   constructor(private invoiceIncomeService: InvoiceIncomesService, private invoiceExpensesService: InvoiceExpensesService) { }
 
-  getFundIcomes(date?: string, fundId?: number) {
+  getFundIncomes(date?: string, fundId?: number) {
     this.invoiceIncomeService.invoiceIncomesChanged.subscribe(incomes => {
       this.allIncomes = incomes.filter(income => {
         if (date) {
@@ -44,6 +44,18 @@ export class DashboardDataService {
     });
     this.invoiceExpensesService.getInvoiceExpenses();
     return this.allExpenses;
+  }
+
+  saveFundIncomes(incomes: InvoiceIncome[]) {
+    incomes.map(income => {
+      this.invoiceIncomeService.updateInvoiceIncome(income.id, income);
+    });
+  }
+
+  saveFundExpenses(expenses: InvoiceExpense[]) {
+    expenses.map(expense => {
+      this.invoiceExpensesService.updateInvoiceExpense(expense.id, expense);
+    });
   }
 
 

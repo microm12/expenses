@@ -1,9 +1,4 @@
-import { Injectable } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class DateRangeService {
+export class DateUtilities {
 
   constructor() { }
 
@@ -11,13 +6,13 @@ export class DateRangeService {
     let updated = new Date(date);
     updated.setDate(updated.getDate() + days);
     return updated;
-  }
+  };
 
   subtractDays = (date: Date, days: number) => {
     let updated = new Date(date);
     updated.setDate(updated.getDate() - days);
     return updated;
-  }
+  };
 
   formatDate(date: Date) {
     let month = '' + (date.getMonth() + 1);
@@ -48,10 +43,10 @@ export class DateRangeService {
     if (mode === 'next') {
       startDate = this.addDays(new Date(range[0]), 15);
       endDate = this.addDays(new Date(range[1]), 15);
-  } else if (mode === 'prev') {
+    } else if (mode === 'prev') {
       startDate = this.subtractDays(new Date(range[0]), 15);
       endDate = this.subtractDays(new Date(range[1]), 15);
-  }
+    }
     return [this.formatDate(startDate), this.formatDate(endDate)];
   }
 }
