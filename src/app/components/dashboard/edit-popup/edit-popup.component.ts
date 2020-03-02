@@ -27,19 +27,25 @@ export class EditPopupComponent implements OnInit {
     private fundsService: FundsService) { }
 
   ngOnInit() {
-    this.incomes = (this.dashboardDataService.getFundIncomes(this.data.date).length) ? this.dashboardDataService.getFundIncomes(this.data.date) : null;
-    this.expenses = (this.dashboardDataService.getFundExpenses(this.data.date).length) ? this.dashboardDataService.getFundExpenses(this.data.date) : null;
+    this.incomes = (this.dashboardDataService.getFundIncomes(this.data.date).length) ?
+      this.dashboardDataService.getFundIncomes(this.data.date) :
+      null;
+    this.expenses = (this.dashboardDataService.getFundExpenses(this.data.date).length) ?
+      this.dashboardDataService.getFundExpenses(this.data.date) :
+      null;
     this.fundIdList = this.fundsService.getFundIds();
     this.initForm();
+    console.log(this.incomeControls);
+
   }
 
   initForm() {
-    let incomes = new FormArray([]);
-    let expenses = new FormArray([]);
+    const incomes = new FormArray([]);
+    const expenses = new FormArray([]);
 
     if (this.incomes) {
       this.incomes.map(income => {
-        let incomeSplit = new FormArray([]);
+        const incomeSplit = new FormArray([]);
         income.transaction.accountTransactions.map(trans => {
           incomeSplit.push(new FormGroup({
             tameioId: new FormControl(trans.fundId, Validators.required),
@@ -58,7 +64,7 @@ export class EditPopupComponent implements OnInit {
 
     if (this.expenses) {
       this.expenses.map(expense => {
-        let expenseSplit = new FormArray([]);
+        const expenseSplit = new FormArray([]);
         expense.transaction.accountTransactions.map(trans => {
           expenseSplit.push(new FormGroup({
             tameioId: new FormControl(trans.fundId, Validators.required),
@@ -112,7 +118,7 @@ export class EditPopupComponent implements OnInit {
       this.dashboardDataService.saveFundIncomes(this.incomes.map(income => {
         const newTrans = [];
         const transArray = this.getIncomeSplitControls(this.incomes.indexOf(income));
-        for (let trans of transArray) {
+        for (const trans of transArray) {
           newTrans.push(new TransData(trans.value.tameioId,
             trans.value.tameioAmount));
         }
@@ -120,7 +126,9 @@ export class EditPopupComponent implements OnInit {
           income.name,
           income.customerId,
           income.payoutPeriod,
-          new Transaction(newTrans, new DateUtilities().formatDate(new Date(this.form.value['incomes'][this.incomes.indexOf(income)].incomeTransDate))),
+          new Transaction(
+            newTrans,
+            new DateUtilities().formatDate(new Date(this.form.value['incomes'][this.incomes.indexOf(income)].incomeTransDate))),
           income.id));
       }));
     }
@@ -129,14 +137,16 @@ export class EditPopupComponent implements OnInit {
       this.dashboardDataService.saveFundExpenses(this.expenses.map(expense => {
         const newTrans = [];
         const transArray = this.getExpenseSplitControls(this.expenses.indexOf(expense));
-        for (let trans of transArray) {
+        for (const trans of transArray) {
           newTrans.push(new TransData(trans.value.tameioId,
             trans.value.tameioAmount));
         }
         return (new InvoiceExpense(
           expense.name,
           expense.payoutPeriod,
-          new Transaction(newTrans, new DateUtilities().formatDate(new Date(this.form.value['expenses'][this.expenses.indexOf(expense)].expenseTransDate))),
+          new Transaction(
+            newTrans,
+            new DateUtilities().formatDate(new Date(this.form.value['expenses'][this.expenses.indexOf(expense)].expenseTransDate))),
           expense.supplierId,
           expense.id));
       }));

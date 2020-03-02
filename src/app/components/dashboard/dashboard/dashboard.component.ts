@@ -110,8 +110,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   onClick(e) {
     const dialogRef = this.dialog.open(EditPopupComponent, {
       data: { date: e.points[0].x },
-      width: '95%',
-      height: '90%'
+      width: '95%'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -190,8 +189,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       tameio.y = uniqueAmounts;
 
       tempData.push([tameio]);
-      console.log(filteredData);
-
     });
 
     this.fundData = tempData;
