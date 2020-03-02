@@ -35,8 +35,6 @@ export class EditPopupComponent implements OnInit {
       null;
     this.fundIdList = this.fundsService.getFundIds();
     this.initForm();
-    console.log(this.incomeControls);
-
   }
 
   initForm() {
@@ -57,7 +55,7 @@ export class EditPopupComponent implements OnInit {
             incomeTransDate: new FormControl(income.transaction.date, Validators.required),
             incTotal: new FormControl(income.total),
             incomeSplit
-          })
+          }, this.totalIncomeValidator)
         );
       });
     }
@@ -76,7 +74,7 @@ export class EditPopupComponent implements OnInit {
             expenseTransDate: new FormControl(expense.transaction.date, Validators.required),
             expTotal: new FormControl(expense.total),
             expenseSplit
-          })
+          }, this.totalExpenseValidator)
         );
       });
     }
@@ -129,7 +127,8 @@ export class EditPopupComponent implements OnInit {
           new Transaction(
             newTrans,
             new DateUtilities().formatDate(new Date(this.form.value['incomes'][this.incomes.indexOf(income)].incomeTransDate))),
-          income.id));
+          income.id,
+          this.form.value['incomes'][this.incomes.indexOf(income)].incTotal));
       }));
     }
 
@@ -148,7 +147,8 @@ export class EditPopupComponent implements OnInit {
             newTrans,
             new DateUtilities().formatDate(new Date(this.form.value['expenses'][this.expenses.indexOf(expense)].expenseTransDate))),
           expense.supplierId,
-          expense.id));
+          expense.id,
+          this.form.value['expenses'][this.expenses.indexOf(expense)].expTotal));
       }));
     }
 
@@ -160,6 +160,28 @@ export class EditPopupComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  totalIncomeValidator(group: FormGroup): any {
+    if (group) {
+      let sum = 0;
+      group.get('incomeSplit').value.map(split => { sum += split.tameioAmount; });
+      if (group.get('incTotal').value !== sum) {
+        return { notMatching: true };
+      }
+    }
+    return null;
+  }
+
+  totalExpenseValidator(group: FormGroup): any {
+    if (group) {
+      let sum = 0;
+      group.get('expenseSplit').value.map(split => { sum += split.tameioAmount; });
+      if (group.get('expTotal').value !== sum) {
+        return { notMatching: true };
+      }
+    }
+    return null;
+  }
+
   get incomeControls() {
     return (<FormArray>this.form.get("incomes")).controls;
   }
@@ -169,6 +191,9 @@ export class EditPopupComponent implements OnInit {
   }
 
   getIncomeSplitControls(index: number) {
+    console.log(<FormArray>this.incomeControls[index].controls.incomeSplit.controls);
+    console.log(<FormArray>this.incomeControls[index]);
+
     return (<FormArray>this.incomeControls[index].controls.incomeSplit.controls);
   }
 

@@ -8,7 +8,7 @@ export class InvoiceExpense {
   payoutPeriod: number;
   transaction: Transaction;
 
-  constructor(name, payoutPeriod, transaction, supplierId?, id?) {
+  constructor(name, payoutPeriod, transaction, supplierId?, id?, total?) {
     this.id = (id) ? id : Math.ceil(Math.random() * 10);
     this.name = name;
     this.supplierId = supplierId ? supplierId : null;
@@ -16,9 +16,15 @@ export class InvoiceExpense {
     // this.amount = amount;
     this.payoutPeriod = payoutPeriod;
     this.transaction = transaction;
-    let ids = [];
+    if (total) {
+      this.total = total;
+    } else {
+      this.transaction.accountTransactions.map(data => {
+        this.total += data.amount;
+      });
+    }
+    const ids = [];
     this.transaction.accountTransactions.map(data => {
-      this.total += data.amount;
       ids.push(data.fundId);
     });
     this.fundIds = ids.toString();
