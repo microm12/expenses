@@ -183,17 +183,14 @@ export class EditPopupComponent implements OnInit {
   }
 
   get incomeControls() {
-    return (<FormArray>this.form.get("incomes")).controls;
+    return (<FormArray>this.form.get('incomes')).controls;
   }
 
   get expenseControls() {
-    return (<FormArray>this.form.get("expenses")).controls;
+    return (<FormArray>this.form.get('expenses')).controls;
   }
 
   getIncomeSplitControls(index: number) {
-    console.log(<FormArray>this.incomeControls[index].controls.incomeSplit.controls);
-    console.log(<FormArray>this.incomeControls[index]);
-
     return (<FormArray>this.incomeControls[index].controls.incomeSplit.controls);
   }
 

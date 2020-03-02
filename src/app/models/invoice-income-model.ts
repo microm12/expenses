@@ -1,10 +1,10 @@
-import { Transaction } from "./transaction";
+import { Transaction } from './transaction';
 export class InvoiceIncome {
   id?: number;
   name: string;
   customerId: number;
   fundIds;
-  total: number = 0;
+  total = 0;
   payoutPeriod: number;
   transaction: Transaction;
 
