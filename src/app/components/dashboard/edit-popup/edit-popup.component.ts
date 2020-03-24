@@ -191,11 +191,11 @@ export class EditPopupComponent implements OnInit {
   }
 
   getIncomeSplitControls(index: number) {
-    return (<FormArray>this.incomeControls[index].controls.incomeSplit.controls);
+    return ((this.incomeControls[index] as any).controls.incomeSplit.controls);
   }
 
   getExpenseSplitControls(index: number) {
-    return (<FormArray>this.expenseControls[index].controls.expenseSplit.controls);
+    return ((this.expenseControls[index] as any).controls.expenseSplit.controls);
   }
 
 }
